@@ -5,20 +5,28 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   MarkerType,
-  ConnectionMode
+  ConnectionMode,
 } from "react-flow-renderer";
 
 import SimpleFloatingEdge from "./SimpleFloatingEdge";
-import CompanyNode from "./CompanyNode";
-import PersonNode from "./PersonNode";
+import {
+  LLCNode,
+  PartnershipNode,
+  TrustNode,
+  SCorpNode,
+  IndividualNode,
+} from "./Nodes";
 
 const nodeTypes = {
-  company: CompanyNode,
-  person: PersonNode
+  partnership: PartnershipNode,
+  individual: IndividualNode,
+  llc: LLCNode,
+  trust: TrustNode,
+  "s-corp": SCorpNode,
 };
 
 const edgeTypes = {
-  floating: SimpleFloatingEdge
+  floating: SimpleFloatingEdge,
 };
 
 const fitViewOptions = { padding: 4 };
@@ -35,7 +43,7 @@ const NodeAsHandleFlow = ({ initialNodes, initialEdges }) => {
           {
             ...params,
             type: "floating",
-            markerEnd: { type: MarkerType.Arrow }
+            markerEnd: { type: MarkerType.Arrow },
           },
           eds
         )
