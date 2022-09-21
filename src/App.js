@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Container, Row, Col } from "react-bootstrap";
 import useExcelFetcher from "./ExcelFetcher/useExcelFetcher";
 import { getNodes, getEdges } from "./ExcelFetcher/dataTransformer";
+import DownloadButton from "./DownloadButton";
 
 const ContainerDiv = styled(Container)`
   font-family: sans-serif;
@@ -24,19 +25,19 @@ export default function App() {
   const initialNodes = getNodes(entities);
   const initialEdges = getEdges(holdings, entities);
 
-  console.log("intiial edges", initialEdges);
-  console.log("intiial nodes", initialNodes);
-
   return (
-    <ContainerDiv fluid>
-      <Row>
-        <DemoArea>
-          <NodePlotter
-            initialNodes={initialNodes}
-            initialEdges={initialEdges}
-          />
-        </DemoArea>
-      </Row>
-    </ContainerDiv>
+    <>
+      <DownloadButton />
+      <ContainerDiv fluid>
+        <Row>
+          <DemoArea>
+            <NodePlotter
+              initialNodes={initialNodes}
+              initialEdges={initialEdges}
+            />
+          </DemoArea>
+        </Row>
+      </ContainerDiv>
+    </>
   );
 }
