@@ -27,7 +27,7 @@ function DownloadButton() {
   };
 
   return (
-    <button className="download-btn" onClick={onClick}>
+    <button className="primary-btn download-button" onClick={onClick}>
       Download Image
     </button>
   );

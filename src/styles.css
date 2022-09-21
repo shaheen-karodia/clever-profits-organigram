@@ -1,3 +1,18 @@
+:root {
+  /* Colors: */
+  --primary-color: #1f68fa;
+  --light-text-color: #f5f6f7;
+  --light-placeholder-color: #ced4de;
+  --dark-text-color: #2d3747;
+
+  /* Shadows: */
+  --shadow-dilute: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);
+  --shadow-conc: 2px 4px 8px 0 rgba(46, 61, 73, 0.2);
+
+  /* Misc: */
+  --transition: all 0.2s ease-in-out;
+}
+
 .simple-floatingedges {
   flex-direction: column;
   display: flex;
@@ -54,13 +69,9 @@
 }
 
 /***********************
-  Download Button
+  Primary Button
 ***********************/
-.download-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
+.primary-btn {
   border: 1px solid #eee;
   background: #ebf8ff;
   padding: 10px 20px;
@@ -69,6 +80,56 @@
   cursor: pointer;
 }
 
-.download-btn:hover {
+.primary-btn:hover {
   opacity: 0.9;
+}
+
+/*
+Download Button 
+**/
+.download-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+/*
+ Menu Button 
+**/
+.menu-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+/*******************
+  MENU 
+********************/
+.Menu {
+  padding: 1rem;
+  position: relative;
+  background: #282828;
+  color: var(--light-text-color);
+  height: 100%;
+}
+
+.Menu button {
+  background: none;
+  border: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  fill: var(--light-placeholder-color);
+  transition: var(--transition);
+}
+
+.Menu button:hover {
+  fill: var(--light-text-color);
 }
