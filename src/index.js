@@ -10,7 +10,7 @@ const rootElement = document.getElementById("root");
 
 ReactDOM.render(
   <StrictMode>
-    <MenuProvider MenuComponent={Menu} animation="push">
+    <MenuProvider MenuComponent={Menu} animation="push" width={"900px"}>
       <App />
     </MenuProvider>
   </StrictMode>,

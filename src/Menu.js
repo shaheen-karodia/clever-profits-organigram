@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
+import DataInputGrid from "./DataInputGrid";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
   return (
     <div className="Menu">
-      yeet
+      <DataInputGrid />
       <button onClick={closeMenu}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -65,7 +65,7 @@ export const LLCNode = memo(({ data }) => {
         <path
           d="M0,0 L120,0  L130,25 L120,50 L0,50 z"
           fill="#784be8"
-          stroke-width="0"
+          strokeWidth="0"
           stroke="#fff"
         ></path>
       </svg>
