@@ -31,20 +31,21 @@ const DataLabel = ({ label }) => (
   </div>
 );
 
-const Wrapper = ({ children }) => (
+const Wrapper = ({ children, label }) => (
   <div style={{ position: "relative" }}>
     <Handle type="source" position="top" id="a" />
     <Handle type="source" position="right" id="b" />
     <Handle type="source" position="bottom" id="c" />
     <Handle type="source" position="left" id="d" />
     {children}
+    <DataLabel label={label} />
   </div>
 );
 
 // ************************************************** //
 export const PartnershipNode = memo(({ data }) => {
   return (
-    <Wrapper>
+    <Wrapper label={data.label}>
       <svg width="100" height="70" style={svgStyleObj}>
         <path
           d="M0,70 L50,0 L100,70 z"
@@ -53,14 +54,13 @@ export const PartnershipNode = memo(({ data }) => {
           stroke="#fff"
         ></path>
       </svg>
-      <DataLabel label={data.label} />
     </Wrapper>
   );
 });
 
 export const LLCNode = memo(({ data }) => {
   return (
-    <Wrapper>
+    <Wrapper label={data.label}>
       <svg width="130" height="50" style={svgStyleObj}>
         <path
           d="M0,0 L120,0  L130,25 L120,50 L0,50 z"
@@ -69,28 +69,18 @@ export const LLCNode = memo(({ data }) => {
           stroke="#fff"
         ></path>
       </svg>
-      <DataLabel label={data.label} />
     </Wrapper>
   );
 });
 
 export const TrustNode = memo(({ data }) => {
-  return (
-    <>
-      Pentagon: Trust
-      {data.label}
-      <Handle type="source" position="top" id="a" />
-      <Handle type="source" position="right" id="b" />
-      <Handle type="source" position="bottom" id="c" />
-      <Handle type="source" position="left" id="d" />
-    </>
-  );
+  return <Wrapper label={data.label}>Pentagon: Trust</Wrapper>;
 });
 
 // TODO: this is a parallelogram not a trapezoid
 export const SCorpNode = memo(({ data }) => {
   return (
-    <Wrapper>
+    <Wrapper label={data.label}>
       <svg width="150" height="70" style={svgStyleObj}>
         <path
           d="M0,70 L37.5,0 L150,0 L112.5,70 z"
@@ -99,14 +89,13 @@ export const SCorpNode = memo(({ data }) => {
           stroke="#fff"
         ></path>
       </svg>
-      <DataLabel label={data.label} />
     </Wrapper>
   );
 });
 
 export const IndividualNode = memo(({ data }) => {
   return (
-    <Wrapper>
+    <Wrapper label={data.label}>
       <svg width="150" height="50" style={svgStyleObj}>
         <ellipse
           cx="75"
@@ -118,7 +107,6 @@ export const IndividualNode = memo(({ data }) => {
           stroke="#fff"
         ></ellipse>
       </svg>
-      <DataLabel label={data.label} />
     </Wrapper>
   );
 });
