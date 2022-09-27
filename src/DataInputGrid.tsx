@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   DataEditor,
@@ -16,7 +16,7 @@ interface DummyItem {
   email: string;
 }
 
-const data: DummyItem[] = [
+let initData: DummyItem[] = [
   {
     name: "Deidre Morris",
     company: "GONKLE",
@@ -30,103 +30,29 @@ const data: DummyItem[] = [
     phone: "+1 (869) 520-2227",
   },
   {
-    name: "Lidia Bowers",
-    company: "ANOCHA",
-    email: "lidiabowers@anocha.com",
-    phone: "+1 (808) 414-3826",
-  },
-  {
-    name: "Jones Norton",
-    company: "REPETWIRE",
-    email: "jonesnorton@repetwire.com",
-    phone: "+1 (875) 582-3320",
-  },
-  {
-    name: "Lula Bruce",
-    company: "COMDOM",
-    email: "lulabruce@comdom.com",
-    phone: "+1 (873) 452-2472",
-  },
-  {
-    name: "Larsen Montgomery",
-    company: "SQUISH",
-    email: "larsenmontgomery@squish.com",
-    phone: "+1 (893) 482-3651",
-  },
-  {
-    name: "Becky Bright",
-    company: "COMCUR",
-    email: "beckybright@comcur.com",
-    phone: "+1 (879) 494-2331",
-  },
-  {
-    name: "Charlotte Rowland",
-    company: "FROLIX",
-    email: "charlotterowland@frolix.com",
-    phone: "+1 (861) 439-2134",
-  },
-  {
-    name: "Sonya Hensley",
-    company: "GEEKETRON",
-    email: "sonyahensley@geeketron.com",
-    phone: "+1 (802) 553-2194",
-  },
-  {
-    name: "Stephenson Guthrie",
-    company: "EXOSWITCH",
-    email: "stephensonguthrie@exoswitch.com",
-    phone: "+1 (903) 449-3271",
-  },
-  {
-    name: "Mcmillan Cline",
-    company: "TURNLING",
-    email: "mcmillancline@turnling.com",
-    phone: "+1 (982) 496-2454",
-  },
-  {
-    name: "Kemp Davis",
-    company: "TETRATREX",
-    email: "kempdavis@tetratrex.com",
-    phone: "+1 (859) 594-2982",
-  },
-  {
-    name: "Matilda Levy",
-    company: "SLOFAST",
-    email: "matildalevy@slofast.com",
-    phone: "+1 (841) 521-2444",
-  },
-  {
-    name: "Hattie Simpson",
-    company: "COMTRAK",
-    email: "hattiesimpson@comtrak.com",
-    phone: "+1 (962) 587-3805",
-  },
-  {
-    name: "Kinney Munoz",
-    company: "IDETICA",
-    email: "kinneymunoz@idetica.com",
-    phone: "+1 (921) 513-2012",
-  },
-  {
-    name: "Lambert Raymond",
-    company: "TURNABOUT",
-    email: "lambertraymond@turnabout.com",
-    phone: "+1 (919) 519-2442",
-  },
-  {
-    name: "Bryant Dunlap",
-    company: "BYTREX",
-    email: "bryantdunlap@bytrex.com",
-    phone: "+1 (872) 583-2883",
+    name: "Sheryl asdsf",
+    company: "EVENTAGE",
+    email: "sherylcraig@eventage.com",
+    phone: "+1 (869) 520-2227",
   },
 ];
 
 function DataInputGrid() {
+  // const [numRows, setNumRows] = React.useState(20);
+  const [len, setLen] = useState(initData.length);
   const getContent = React.useCallback((cell: Item): GridCell => {
+    console.log("are you being called");
     const [col, row] = cell;
-    const dataRow = data[row];
+
+    const dataRow = initData[row];
+
+    // console.log("dataOverall", data);
+    console.log("row asd", row);
+    console.log("datarow", initData[row]);
     const indexes: (keyof DummyItem)[] = ["name", "company", "email", "phone"];
     const d = dataRow[indexes[col]];
+
+    //TODO what if tgere are itger tyoes
     return {
       kind: GridCellKind.Text,
       allowOverlay: true,
@@ -138,8 +64,8 @@ function DataInputGrid() {
 
   const onCellEdited = React.useCallback(
     (cell: Item, newValue: EditableGridCell) => {
+      //TODO this will not always be true
       if (newValue.kind !== GridCellKind.Text) {
-        //TODO this will not always be true
         // we only have text cells, might as well just die here.
         return;
       }
@@ -152,10 +78,48 @@ function DataInputGrid() {
       ];
       const [col, row] = cell;
       const key = indexes[col];
-      data[row][key] = newValue.data;
+      // data[row][key] = newValue.data; //TODO
     },
     []
   );
+
+  const onRowAppended = React.useCallback(() => {
+    console.log("asSdsdfdfdas", initData);
+
+    const obj = {
+      name: "",
+      company: "goat",
+      email: "",
+      phone: "",
+    };
+
+    initData = [...initData, obj];
+    setLen((len) => len + 1);
+    console.log("new data", initData);
+  }, []);
+
+  // const onRowAppended = React.useCallback(() => {
+  //       const newRow = numRows;
+  //     for (let c = 0; c < 6; c++) {
+  //       const cell = getCellContent([c, newRow]);
+  //       setCellValueRaw([c, newRow], clearCell(cell));
+  //     }
+  //       setNumRows((cv) => cv + 1);
+  //     }, [getCellContent, numRows, setCellValueRaw]);
+
+  // const onRowAppended = React.useCallback(() => {
+  //   const newRow = numRows;
+  //   for (let c = 0; c < 6; c++) {
+  //     const cell = getCellContent([c, newRow]);
+  //     setCellValueRaw([c, newRow], clearCell(cell));
+  //   }
+  //   setNumRows((cv) => cv + 1);
+  // }, [getCellContent, numRows, setCellValueRaw]);
+
+  //what is the last row now
+  // extract the info into a cell
+  //set the vakyes ub yiyr store
+  //add one to the row
 
   const columns = useMemo<GridColumn[]>(() => {
     return [
@@ -179,12 +143,29 @@ function DataInputGrid() {
   }, []);
 
   return (
-    <DataEditor
-      getCellContent={getContent}
-      columns={columns}
-      rows={data.length}
-      onCellEdited={onCellEdited}
-    />
+    <div
+      style={{
+        borderRadius: "12px",
+        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.4)",
+        overflow: "hidden",
+      }}
+    >
+      <DataEditor
+        getCellContent={getContent}
+        columns={columns}
+        rows={len}
+        onCellEdited={onCellEdited}
+        width="100"
+        rowMarkers="number"
+        trailingRowOptions={{
+          sticky: true,
+          tint: true,
+          hint: "New row...",
+        }}
+        // @ts-ignore
+        onRowAppended={onRowAppended} //eslin
+      />
+    </div>
   );
 }
 

@@ -108,7 +108,7 @@ Download Button
   MENU 
 ********************/
 .Menu {
-  padding: 1rem;
+  padding: 2rem;
   position: relative;
   background: #282828;
   color: var(--light-text-color);
