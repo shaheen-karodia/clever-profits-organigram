@@ -16,7 +16,7 @@ interface DummyItem {
   email: string;
 }
 
-let initData: DummyItem[] = [
+let data: DummyItem[] = [
   {
     name: "Deidre Morris",
     company: "GONKLE",
@@ -39,20 +39,15 @@ let initData: DummyItem[] = [
 
 function DataInputGrid() {
   // const [numRows, setNumRows] = React.useState(20);
-  const [len, setLen] = useState(initData.length);
+  const [len, setLen] = useState(data.length);
   const getContent = React.useCallback((cell: Item): GridCell => {
-    console.log("are you being called");
     const [col, row] = cell;
 
-    const dataRow = initData[row];
+    const dataRow = data[row];
 
-    // console.log("dataOverall", data);
-    console.log("row asd", row);
-    console.log("datarow", initData[row]);
     const indexes: (keyof DummyItem)[] = ["name", "company", "email", "phone"];
     const d = dataRow[indexes[col]];
 
-    //TODO what if tgere are itger tyoes
     return {
       kind: GridCellKind.Text,
       allowOverlay: true,
@@ -78,13 +73,13 @@ function DataInputGrid() {
       ];
       const [col, row] = cell;
       const key = indexes[col];
-      // data[row][key] = newValue.data; //TODO
+      data[row][key] = newValue.data; //TODO
     },
     []
   );
 
   const onRowAppended = React.useCallback(() => {
-    console.log("asSdsdfdfdas", initData);
+    console.log("asSdsdfdfdas", data);
 
     const obj = {
       name: "",
@@ -93,33 +88,9 @@ function DataInputGrid() {
       phone: "",
     };
 
-    initData = [...initData, obj];
+    data = [...data, obj];
     setLen((len) => len + 1);
-    console.log("new data", initData);
   }, []);
-
-  // const onRowAppended = React.useCallback(() => {
-  //       const newRow = numRows;
-  //     for (let c = 0; c < 6; c++) {
-  //       const cell = getCellContent([c, newRow]);
-  //       setCellValueRaw([c, newRow], clearCell(cell));
-  //     }
-  //       setNumRows((cv) => cv + 1);
-  //     }, [getCellContent, numRows, setCellValueRaw]);
-
-  // const onRowAppended = React.useCallback(() => {
-  //   const newRow = numRows;
-  //   for (let c = 0; c < 6; c++) {
-  //     const cell = getCellContent([c, newRow]);
-  //     setCellValueRaw([c, newRow], clearCell(cell));
-  //   }
-  //   setNumRows((cv) => cv + 1);
-  // }, [getCellContent, numRows, setCellValueRaw]);
-
-  //what is the last row now
-  // extract the info into a cell
-  //set the vakyes ub yiyr store
-  //add one to the row
 
   const columns = useMemo<GridColumn[]>(() => {
     return [
@@ -162,8 +133,7 @@ function DataInputGrid() {
           tint: true,
           hint: "New row...",
         }}
-        // @ts-ignore
-        onRowAppended={onRowAppended} //eslin
+        onRowAppended={onRowAppended}
       />
     </div>
   );
