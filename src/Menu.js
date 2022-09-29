@@ -7,7 +7,7 @@ function Menu() {
   return (
     <div className="Menu">
       <EntitiesTable />
-      <button onClick={closeMenu} tabindex="-1">
+      <button onClick={closeMenu}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

@@ -6,7 +6,6 @@ class EntitiesTable extends React.Component {
 
     //  this.state.products = [];
     this.state = {};
-    this.state.filterText = "";
     this.state.products = [
       {
         id: 1,
@@ -52,9 +51,7 @@ class EntitiesTable extends React.Component {
       },
     ];
   }
-  handleUserInput(filterText) {
-    this.setState({ filterText: filterText });
-  }
+
   handleRowDel(product) {
     var index = this.state.products.indexOf(product);
     this.state.products.splice(index, 1);
@@ -90,7 +87,6 @@ class EntitiesTable extends React.Component {
       return product;
     });
     this.setState({ products: newProducts });
-    //  console.log(this.state.products);
   }
   render() {
     return (
@@ -100,56 +96,50 @@ class EntitiesTable extends React.Component {
           onRowAdd={this.handleAddEvent.bind(this)}
           onRowDel={this.handleRowDel.bind(this)}
           products={this.state.products}
-          filterText={this.state.filterText}
         />
       </div>
     );
   }
 }
 
-class ProductTable extends React.Component {
-  render() {
-    var onProductTableUpdate = this.props.onProductTableUpdate;
-    var rowDel = this.props.onRowDel;
-    var filterText = this.props.filterText;
-    var product = this.props.products.map(function (product) {
-      if (product.name.indexOf(filterText) === -1) {
-        return;
-      }
-      return (
-        <ProductRow
-          onProductTableUpdate={onProductTableUpdate}
-          product={product}
-          onDelEvent={rowDel.bind(this)}
-          key={product.id}
-        />
-      );
-    });
-    return (
-      <div>
-        <button
-          type="button"
-          onClick={this.props.onRowAdd}
-          className="btn btn-success pull-right"
-        >
-          Add
-        </button>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>price</th>
-              <th>quantity</th>
-              <th>category</th>
-            </tr>
-          </thead>
+const ProductTable = ({
+  onProductTableUpdate,
+  onRowDel,
+  products,
+  onRowAdd,
+}) => {
+  return (
+    <div>
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>price</th>
+            <th>quantity</th>
+            <th>category</th>
+          </tr>
+        </thead>
 
-          <tbody>{product}</tbody>
-        </table>
-      </div>
-    );
-  }
-}
+        <tbody>
+          {products.map((product) => (
+            <ProductRow
+              onProductTableUpdate={onProductTableUpdate}
+              product={product}
+              onDelEvent={onRowDel}
+              key={product.id}
+            />
+          ))}
+        </tbody>
+      </table>
+      <input
+        type="button"
+        onClick={onRowAdd}
+        className="add-btn "
+        value="Add Row"
+      />
+    </div>
+  );
+};
 
 class ProductRow extends React.Component {
   onDelEvent() {
