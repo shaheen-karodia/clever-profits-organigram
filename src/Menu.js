@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
-import DataInputGrid from "./DataInputGrid";
+import EntitiesTable from "./TableInput";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
   return (
     <div className="Menu">
-      <DataInputGrid />
+      <EntitiesTable />
       <button onClick={closeMenu} tabindex="-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
