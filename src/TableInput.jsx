@@ -1,106 +1,100 @@
-import React from "react";
+import React, { useState } from "react";
 
-class EntitiesTable extends React.Component {
-  constructor(props) {
-    super(props);
+const initialData = [
+  {
+    id: 1,
+    category: "Sporting Goods",
+    price: "49.99",
+    qty: 12,
+    name: "football",
+  },
+  {
+    id: 2,
+    category: "Sporting Goods",
+    price: "9.99",
+    qty: 15,
+    name: "baseball",
+  },
+  {
+    id: 3,
+    category: "Sporting Goods",
+    price: "29.99",
+    qty: 14,
+    name: "basketball",
+  },
+  {
+    id: 4,
+    category: "Electronics",
+    price: "99.99",
+    qty: 34,
+    name: "iPod Touch",
+  },
+  {
+    id: 5,
+    category: "Electronics",
+    price: "399.99",
+    qty: 12,
+    name: "iPhone 5",
+  },
+  {
+    id: 6,
+    category: "Electronics",
+    price: "199.99",
+    qty: 23,
+    name: "nexus 7",
+  },
+];
+const EntitiesTable = () => {
+  const [products, setProducts] = useState([...initialData]);
 
-    //  this.state.products = [];
-    this.state = {};
-    this.state.products = [
-      {
-        id: 1,
-        category: "Sporting Goods",
-        price: "49.99",
-        qty: 12,
-        name: "football",
-      },
-      {
-        id: 2,
-        category: "Sporting Goods",
-        price: "9.99",
-        qty: 15,
-        name: "baseball",
-      },
-      {
-        id: 3,
-        category: "Sporting Goods",
-        price: "29.99",
-        qty: 14,
-        name: "basketball",
-      },
-      {
-        id: 4,
-        category: "Electronics",
-        price: "99.99",
-        qty: 34,
-        name: "iPod Touch",
-      },
-      {
-        id: 5,
-        category: "Electronics",
-        price: "399.99",
-        qty: 12,
-        name: "iPhone 5",
-      },
-      {
-        id: 6,
-        category: "Electronics",
-        price: "199.99",
-        qty: 23,
-        name: "nexus 7",
-      },
-    ];
-  }
+  const handleRowDel = (product) => {
+    const updatedProducts = products.filter((p) => p.id !== product.id);
+    setProducts(updatedProducts);
+  };
 
-  handleRowDel(product) {
-    var index = this.state.products.indexOf(product);
-    this.state.products.splice(index, 1);
-    this.setState(this.state.products);
-  }
-
-  handleAddEvent(evt) {
-    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    var product = {
+  const handleAddEvent = (evt) => {
+    const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36); //TODO must be a better way to generate a unique id
+    const product = {
       id: id,
       name: "",
       price: "",
       category: "",
       qty: 0,
     };
-    this.state.products.push(product);
-    this.setState(this.state.products);
-  }
 
-  handleProductTable(evt) {
-    var item = {
-      id: evt.target.id,
-      name: evt.target.name,
-      value: evt.target.value,
+    setProducts([...products, product]);
+  };
+
+  const handleProductTable = (e) => {
+    const item = {
+      id: e.target.id,
+      name: e.target.name,
+      value: e.target.value,
     };
-    var products = this.state.products.slice();
-    var newProducts = products.map(function (product) {
-      for (var key in product) {
+
+    const newProducts = products.map((product) => {
+      for (let key in product) {
         if (key == item.name && product.id == item.id) {
           product[key] = item.value;
         }
       }
       return product;
     });
-    this.setState({ products: newProducts });
-  }
-  render() {
-    return (
-      <div>
-        <ProductTable
-          onProductTableUpdate={this.handleProductTable.bind(this)}
-          onRowAdd={this.handleAddEvent.bind(this)}
-          onRowDel={this.handleRowDel.bind(this)}
-          products={this.state.products}
-        />
-      </div>
-    );
-  }
-}
+
+    setProducts(newProducts);
+  };
+
+  return (
+    <div>
+      <ProductTable
+        onProductTableUpdate={handleProductTable}
+        onRowAdd={handleAddEvent}
+        onRowDel={handleRowDel}
+        products={products}
+      />
+    </div>
+  );
+};
 
 const ProductTable = ({
   onProductTableUpdate,
