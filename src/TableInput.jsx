@@ -111,6 +111,7 @@ const EntityTable = ({
             <th>price</th>
             <th>quantity</th>
             <th>category</th>
+            <th>Entity Type</th>
           </tr>
         </thead>
 
@@ -174,6 +175,7 @@ const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
           id: entity.id,
         }}
       />
+      <EditableDropDown onEntitiesTableUpdate={onEntitiesTableUpdate} />
       <td className="del-cell">
         <input type="button" onClick={onDelete} value="X" className="del-btn" />
       </td>
@@ -190,6 +192,12 @@ const EditableCell = ({ cellData, onEntitiesTableUpdate }) => (
       value={cellData.value}
       onChange={onEntitiesTableUpdate}
     />
+  </td>
+);
+
+const EditableDropDown = ({ cellData, onEntitiesTableUpdate }) => (
+  <td>
+    <p>yeet</p>
   </td>
 );
 
