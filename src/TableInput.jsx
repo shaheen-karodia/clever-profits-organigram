@@ -45,61 +45,61 @@ const initialData = [
   },
 ];
 const EntitiesTable = () => {
-  const [products, setProducts] = useState([...initialData]);
+  const [entities, setEntities] = useState([...initialData]);
 
-  const handleRowDel = (product) => {
-    const updatedProducts = products.filter((p) => p.id !== product.id);
-    setProducts(updatedProducts);
+  const handleRowDel = (entity) => {
+    const updatedEntities = entities.filter((e) => e.id !== entity.id);
+    setEntities(updatedEntities);
   };
 
   const handleAddEvent = (evt) => {
     const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36); //TODO must be a better way to generate a unique id
-    const product = {
+    const entity = {
       id: id,
       name: "",
       price: "",
       category: "",
-      qty: 0,
+      qty: 45,
     };
 
-    setProducts([...products, product]);
+    setEntities([...entities, entity]);
   };
 
-  const handleProductTable = (e) => {
+  const handleEntityTable = (e) => {
     const item = {
       id: e.target.id,
       name: e.target.name,
       value: e.target.value,
     };
 
-    const newProducts = products.map((product) => {
-      for (let key in product) {
-        if (key == item.name && product.id == item.id) {
-          product[key] = item.value;
+    const newEntities = entities.map((entity) => {
+      for (let key in entity) {
+        if (key == item.name && entity.id == item.id) {
+          entity[key] = item.value;
         }
       }
-      return product;
+      return entity;
     });
 
-    setProducts(newProducts);
+    setEntities(newEntities);
   };
 
   return (
     <div>
-      <ProductTable
-        onProductTableUpdate={handleProductTable}
+      <EntityTable
+        onEntitiesTableUpdate={handleEntityTable}
         onRowAdd={handleAddEvent}
         onRowDel={handleRowDel}
-        products={products}
+        entities={entities}
       />
     </div>
   );
 };
 
-const ProductTable = ({
-  onProductTableUpdate,
+const EntityTable = ({
+  onEntitiesTableUpdate,
   onRowDel,
-  products,
+  entities,
   onRowAdd,
 }) => {
   return (
@@ -115,12 +115,12 @@ const ProductTable = ({
         </thead>
 
         <tbody>
-          {products.map((product) => (
-            <ProductRow
-              onProductTableUpdate={onProductTableUpdate}
-              product={product}
+          {entities.map((entity) => (
+            <EntityRow
+              onEntitiesTableUpdate={onEntitiesTableUpdate}
+              entity={entity}
               onDelEvent={onRowDel}
-              key={product.id}
+              key={entity.id}
             />
           ))}
         </tbody>
@@ -135,43 +135,43 @@ const ProductTable = ({
   );
 };
 
-const ProductRow = ({ onDelEvent, product, onProductTableUpdate }) => {
+const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
   const onDelete = () => {
-    onDelEvent(product);
+    onDelEvent(entity);
   };
 
   return (
     <tr className="eachRow">
       <EditableCell
-        onProductTableUpdate={onProductTableUpdate}
+        onEntitiesTableUpdate={onEntitiesTableUpdate}
         cellData={{
           type: "name",
-          value: product.name,
-          id: product.id,
+          value: entity.name,
+          id: entity.id,
         }}
       />
       <EditableCell
-        onProductTableUpdate={onProductTableUpdate}
+        onEntitiesTableUpdate={onEntitiesTableUpdate}
         cellData={{
           type: "price",
-          value: product.price,
-          id: product.id,
+          value: entity.price,
+          id: entity.id,
         }}
       />
       <EditableCell
-        onProductTableUpdate={onProductTableUpdate}
+        onEntitiesTableUpdate={onEntitiesTableUpdate}
         cellData={{
           type: "qty",
-          value: product.qty,
-          id: product.id,
+          value: entity.qty,
+          id: entity.id,
         }}
       />
       <EditableCell
-        onProductTableUpdate={onProductTableUpdate}
+        onEntitiesTableUpdate={onEntitiesTableUpdate}
         cellData={{
           type: "category",
-          value: product.category,
-          id: product.id,
+          value: entity.category,
+          id: entity.id,
         }}
       />
       <td className="del-cell">
@@ -181,14 +181,14 @@ const ProductRow = ({ onDelEvent, product, onProductTableUpdate }) => {
   );
 };
 
-const EditableCell = ({ cellData, onProductTableUpdate }) => (
+const EditableCell = ({ cellData, onEntitiesTableUpdate }) => (
   <td>
     <input
       type="text"
       name={cellData.type}
       id={cellData.id}
       value={cellData.value}
-      onChange={onProductTableUpdate}
+      onChange={onEntitiesTableUpdate}
     />
   </td>
 );
