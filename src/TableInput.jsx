@@ -1,65 +1,37 @@
 import React, { useState } from "react";
 
+const generateUUID = () =>
+  (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+
+const ENTITY_TEMPLATE_OBJECT = {
+  // id: id,
+  name: "",
+  price: "",
+  category: "",
+  qty: 45,
+  entityType: "person",
+};
+
 const initialData = [
   {
-    id: 1,
-    category: "Sporting Goods",
-    price: "49.99",
-    qty: 12,
-    name: "football",
-  },
-  {
-    id: 2,
-    category: "Sporting Goods",
-    price: "9.99",
-    qty: 15,
-    name: "baseball",
-  },
-  {
-    id: 3,
-    category: "Sporting Goods",
-    price: "29.99",
-    qty: 14,
-    name: "basketball",
-  },
-  {
-    id: 4,
-    category: "Electronics",
-    price: "99.99",
-    qty: 34,
-    name: "iPod Touch",
-  },
-  {
-    id: 5,
-    category: "Electronics",
-    price: "399.99",
-    qty: 12,
-    name: "iPhone 5",
-  },
-  {
-    id: 6,
-    category: "Electronics",
-    price: "199.99",
-    qty: 23,
-    name: "nexus 7",
+    id: generateUUID(),
+    ...ENTITY_TEMPLATE_OBJECT,
   },
 ];
+
 const EntitiesTable = () => {
   const [entities, setEntities] = useState([...initialData]);
 
-  const handleRowDel = (entity) => {
+  const onRowDel = (entity) => {
     const updatedEntities = entities.filter((e) => e.id !== entity.id);
     setEntities(updatedEntities);
   };
 
-  const handleAddEvent = (evt) => {
-    const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36); //TODO must be a better way to generate a unique id
+  const onRowAdd = (evt) => {
+    const id = generateUUID(); //TODO must be a better way to generate a unique id
     const entity = {
-      id: id,
-      name: "",
-      price: "",
-      category: "",
-      qty: 45,
+      ...ENTITY_TEMPLATE_OBJECT,
+      id,
     };
 
     setEntities([...entities, entity]);
@@ -86,24 +58,6 @@ const EntitiesTable = () => {
 
   return (
     <div>
-      <EntityTable
-        onEntitiesTableUpdate={handleEntityTable}
-        onRowAdd={handleAddEvent}
-        onRowDel={handleRowDel}
-        entities={entities}
-      />
-    </div>
-  );
-};
-
-const EntityTable = ({
-  onEntitiesTableUpdate,
-  onRowDel,
-  entities,
-  onRowAdd,
-}) => {
-  return (
-    <div>
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -118,7 +72,7 @@ const EntityTable = ({
         <tbody>
           {entities.map((entity) => (
             <EntityRow
-              onEntitiesTableUpdate={onEntitiesTableUpdate}
+              onEntitiesTableUpdate={handleEntityTable}
               entity={entity}
               onDelEvent={onRowDel}
               key={entity.id}
@@ -129,8 +83,8 @@ const EntityTable = ({
       <input
         type="button"
         onClick={onRowAdd}
-        className="add-btn "
-        value="Add Row"
+        className="add-btn"
+        value="Add Entity Row"
       />
     </div>
   );
@@ -141,6 +95,7 @@ const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
     onDelEvent(entity);
   };
 
+  console.log("nnnnnn", entity);
   return (
     <tr className="eachRow">
       <EditableCell
@@ -175,7 +130,14 @@ const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
           id: entity.id,
         }}
       />
-      <EditableDropDown onEntitiesTableUpdate={onEntitiesTableUpdate} />
+      <EditableDropDown
+        onEntitiesTableUpdate={onEntitiesTableUpdate}
+        cellData={{
+          type: "entityType",
+          value: entity.entityType,
+          id: entity.id,
+        }}
+      />
       <td className="del-cell">
         <input type="button" onClick={onDelete} value="X" className="del-btn" />
       </td>
@@ -195,10 +157,42 @@ const EditableCell = ({ cellData, onEntitiesTableUpdate }) => (
   </td>
 );
 
-const EditableDropDown = ({ cellData, onEntitiesTableUpdate }) => (
-  <td>
-    <p>yeet</p>
-  </td>
-);
+const EditableDropDown = ({ cellData, onEntitiesTableUpdate }) => {
+  console.log("cell", cellData);
+  return (
+    <td>
+      <p>{cellData.value}</p>
+    </td>
+  );
+};
+
+const EditableSelector = ({
+  options,
+  placeholder,
+  selectedOption,
+  onChange,
+}) => {
+  return (
+    <div>
+      <select
+        name=""
+        value={selectedOption}
+        onChange={(e) => onChange(e.target.value)}
+        required
+      >
+        <option value="" disabled>
+          {placeholder}
+        </option>
+        {options.map((e) => {
+          return (
+            <option value={e} key={e}>
+              {e}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
 
 export default EntitiesTable;
