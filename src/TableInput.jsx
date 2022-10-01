@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
-const generateUUID = () =>
-  (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+import { EditableInput, generateUUID } from "./GeneralTableUtils";
 
 const ENTITY_TEMPLATE_OBJECT = {
   // id: id,
@@ -27,8 +25,8 @@ const EntitiesTable = () => {
     setEntities(updatedEntities);
   };
 
-  const onRowAdd = (evt) => {
-    const id = generateUUID(); //TODO must be a better way to generate a unique id
+  const onRowAdd = () => {
+    const id = generateUUID();
     const entity = {
       ...ENTITY_TEMPLATE_OBJECT,
       id,
@@ -37,7 +35,7 @@ const EntitiesTable = () => {
     setEntities([...entities, entity]);
   };
 
-  const handleEntityTable = (e) => {
+  const onTableUpdate = (e) => {
     const item = {
       id: e.target.id,
       name: e.target.name,
@@ -61,7 +59,7 @@ const EntitiesTable = () => {
       <table className="table table-bordered">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Names</th>
             <th>price</th>
             <th>quantity</th>
             <th>category</th>
@@ -72,7 +70,7 @@ const EntitiesTable = () => {
         <tbody>
           {entities.map((entity) => (
             <EntityRow
-              onEntitiesTableUpdate={handleEntityTable}
+              onChange={onTableUpdate}
               entity={entity}
               onDelEvent={onRowDel}
               key={entity.id}
@@ -90,40 +88,39 @@ const EntitiesTable = () => {
   );
 };
 
-const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
+const EntityRow = ({ onDelEvent, entity, onChange }) => {
   const onDelete = () => {
     onDelEvent(entity);
   };
 
-  console.log("nnnnnn", entity);
   return (
     <tr className="eachRow">
-      <EditableCell
-        onEntitiesTableUpdate={onEntitiesTableUpdate}
+      <EditableInput
+        onChange={onChange}
         cellData={{
           type: "name",
           value: entity.name,
           id: entity.id,
         }}
       />
-      <EditableCell
-        onEntitiesTableUpdate={onEntitiesTableUpdate}
+      <EditableInput
+        onChange={onChange}
         cellData={{
           type: "price",
           value: entity.price,
           id: entity.id,
         }}
       />
-      <EditableCell
-        onEntitiesTableUpdate={onEntitiesTableUpdate}
+      <EditableInput
+        onChange={onChange}
         cellData={{
           type: "qty",
           value: entity.qty,
           id: entity.id,
         }}
       />
-      <EditableCell
-        onEntitiesTableUpdate={onEntitiesTableUpdate}
+      <EditableInput
+        onChange={onChange}
         cellData={{
           type: "category",
           value: entity.category,
@@ -131,7 +128,7 @@ const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
         }}
       />
       <EditableDropDown
-        onEntitiesTableUpdate={onEntitiesTableUpdate}
+        onChange={onChange}
         cellData={{
           type: "entityType",
           value: entity.entityType,
@@ -145,19 +142,7 @@ const EntityRow = ({ onDelEvent, entity, onEntitiesTableUpdate }) => {
   );
 };
 
-const EditableCell = ({ cellData, onEntitiesTableUpdate }) => (
-  <td>
-    <input
-      type="text"
-      name={cellData.type}
-      id={cellData.id}
-      value={cellData.value}
-      onChange={onEntitiesTableUpdate}
-    />
-  </td>
-);
-
-const EditableDropDown = ({ cellData, onEntitiesTableUpdate }) => {
+const EditableDropDown = ({ cellData, onChange }) => {
   console.log("cell", cellData);
   return (
     <td>
