@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EditableInput, generateUUID } from "./GeneralTableUtils";
+import { AddButton, EditableInput, generateUUID } from "./GeneralTableUtils";
 
 const ENTITY_TEMPLATE_OBJECT = {
   // id: id,
@@ -59,7 +59,7 @@ const EntitiesTable = () => {
       <table className="table table-bordered">
         <thead>
           <tr>
-            <th>Names</th>
+            <th>Namess</th>
             <th>price</th>
             <th>quantity</th>
             <th>category</th>
@@ -78,12 +78,7 @@ const EntitiesTable = () => {
           ))}
         </tbody>
       </table>
-      <input
-        type="button"
-        onClick={onRowAdd}
-        className="add-btn"
-        value="Add Entity Row"
-      />
+      <AddButton onClick={onRowAdd} value="Add Entity Row" />
     </div>
   );
 };
@@ -148,35 +143,6 @@ const EditableDropDown = ({ cellData, onChange }) => {
     <td>
       <p>{cellData.value}</p>
     </td>
-  );
-};
-
-const EditableSelector = ({
-  options,
-  placeholder,
-  selectedOption,
-  onChange,
-}) => {
-  return (
-    <div>
-      <select
-        name=""
-        value={selectedOption}
-        onChange={(e) => onChange(e.target.value)}
-        required
-      >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((e) => {
-          return (
-            <option value={e} key={e}>
-              {e}
-            </option>
-          );
-        })}
-      </select>
-    </div>
   );
 };
 
