@@ -4,6 +4,8 @@ import {
   DeleteCell,
   EditableInput,
   generateUUID,
+  TableHead,
+  cellTypes,
 } from "./GeneralTableUtils";
 
 const ENTITY_TEMPLATE_OBJECT = {
@@ -11,9 +13,19 @@ const ENTITY_TEMPLATE_OBJECT = {
   name: "",
   price: "",
   category: "",
-  qty: 45,
+  qty: "45",
   entityType: "person",
 };
+
+const ROW_SCHEMA = [
+  { name: "name", initialValue: "john", type: cellTypes.INPUT },
+  { name: "price", initialValue: "", type: cellTypes.INPUT },
+  { name: "category", initialValue: "", type: cellTypes.INPUT },
+  { name: "qty", initialValue: "", type: cellTypes.INPUT },
+  { name: "entityType", initialValue: "person", type: cellTypes.INPUT },
+];
+
+const ENTITY_HEADERS = ["sname", "price", "category", "qty", "entity type"];
 
 const initialData = [
   {
@@ -62,16 +74,7 @@ const EntitiesTable = () => {
   return (
     <div>
       <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>nam</th>
-            <th>price</th>
-            <th>quantity</th>
-            <th>category</th>
-            <th>Entity Type</th>
-          </tr>
-        </thead>
-
+        <TableHead headers={ENTITY_HEADERS} />
         <tbody>
           {entities.map((entity) => (
             <EntityRow

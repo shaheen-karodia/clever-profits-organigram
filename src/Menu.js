@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
+import RelationshipsTable from "./RelationshipsTable";
 import EntitiesTable from "./TableInput";
 
 function Menu() {
@@ -7,6 +8,7 @@ function Menu() {
   return (
     <div className="Menu">
       <EntitiesTable />
+      <RelationshipsTable />
       <button onClick={closeMenu}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
