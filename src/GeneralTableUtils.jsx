@@ -5,6 +5,12 @@ export const AddButton = ({ onClick, value }) => (
   <input type="button" onClick={onClick} className="add-btn" value={value} />
 );
 
+export const DeleteCell = ({ onClick, value }) => (
+  <td className="del-cell">
+    <input type="button" onClick={onClick} value={value} className="del-btn" />
+  </td>
+);
+
 export const EditableInput = ({ cellData, onChange }) => (
   <td>
     <input

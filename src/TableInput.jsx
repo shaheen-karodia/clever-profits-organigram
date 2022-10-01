@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { AddButton, EditableInput, generateUUID } from "./GeneralTableUtils";
+import {
+  AddButton,
+  DeleteCell,
+  EditableInput,
+  generateUUID,
+} from "./GeneralTableUtils";
 
 const ENTITY_TEMPLATE_OBJECT = {
   // id: id,
@@ -59,7 +64,7 @@ const EntitiesTable = () => {
       <table className="table table-bordered">
         <thead>
           <tr>
-            <th>Namess</th>
+            <th>nam</th>
             <th>price</th>
             <th>quantity</th>
             <th>category</th>
@@ -130,9 +135,7 @@ const EntityRow = ({ onDelEvent, entity, onChange }) => {
           id: entity.id,
         }}
       />
-      <td className="del-cell">
-        <input type="button" onClick={onDelete} value="X" className="del-btn" />
-      </td>
+      <DeleteCell onClick={onDelete} value="X" />
     </tr>
   );
 };
