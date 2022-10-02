@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SkarTable, cellTypes, getAdditionalRow } from "./GeneralTableUtils";
 
-const HEADERS = ["yeet", "wheet"];
+const HEADERS = ["Name", "Investment in", "Holdings %"];
 
 const ROW_SCHEMA = [
   { name: "name", initialValue: "", type: cellTypes.INPUT },
@@ -11,14 +11,40 @@ const ROW_SCHEMA = [
 
 const getAdditionalHoldingRow = getAdditionalRow(ROW_SCHEMA);
 function HoldingsTable() {
-  const [holdings, setHoldings] = useState([]);
+  const [holdings, setHoldings] = useState([
+    getAdditionalHoldingRow(),
+    getAdditionalHoldingRow(),
+  ]);
 
-  console.log(getAdditionalHoldingRow());
+  const onCellChange = (e) => {
+    const item = {
+      id: e.target.id,
+      name: e.target.name,
+      value: e.target.value,
+    };
+
+    const newHoldings = holdings.map((h) => {
+      for (let key in h) {
+        if (key == item.name && h.id == item.id) {
+          h[key] = item.value;
+        }
+      }
+      return h;
+    });
+
+    setHoldings(newHoldings);
+  };
+
   return (
     <div>
+      <h2>Holdings Table</h2>
       <p>
-        Relationships Table
-        <SkarTable headers={HEADERS} />
+        <SkarTable
+          headers={HEADERS}
+          rowSchema={ROW_SCHEMA}
+          rows={holdings}
+          onCellChange={onCellChange}
+        />
       </p>
     </div>
   );

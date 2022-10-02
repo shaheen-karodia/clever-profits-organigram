@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import _ from "lodash";
 
 export const cellTypes = {
   INPUT: "INPUT",
@@ -53,6 +54,32 @@ export const getAdditionalRow = (schema) => {
   };
 };
 
+export const RenderRow = ({ row, rowSchema, onCellChange }) => {
+  const normalizedSchema = _.mapKeys(rowSchema, "name");
+  const rowId = row.id;
+  const rowExcludeId = _.omit(row, "id");
+
+  return Object.entries(rowExcludeId).map((entry) => {
+    const name = entry[0];
+    const value = entry[1];
+    const cellType = normalizedSchema[name].type;
+
+    switch (cellType) {
+      case cellTypes.INPUT:
+        return (
+          <EditableInput
+            onChange={onCellChange}
+            cellData={{ type: name, value, id: row.id }}
+          />
+        );
+      case cellTypes.SELECT:
+        return null;
+      default:
+        return null;
+    }
+  });
+};
+
 export const SkarTable = ({
   headers,
   rowSchema,
@@ -65,7 +92,19 @@ export const SkarTable = ({
     <div>
       <table className="table table-bordered">
         <TableHead headers={headers} />
-        <tbody>TODO fill out</tbody>
+        <tbody>
+          {rows.map((row) => {
+            return (
+              <tr className="eachRow" key={row.id}>
+                <RenderRow
+                  row={row}
+                  onCellChange={onCellChange}
+                  rowSchema={rowSchema}
+                />
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
       <AddButton onClick={onRowAdd} value="Add Row" />
     </div>
