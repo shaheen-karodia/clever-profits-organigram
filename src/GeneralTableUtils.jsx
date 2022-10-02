@@ -1,10 +1,11 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const cellTypes = {
   INPUT: "INPUT",
   SELECT: "SELECT",
 };
 
-export const generateUUID = () =>
-  (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+export const generateUUID = () => uuidv4();
 
 export const TableHead = ({ headers }) => {
   return (
@@ -40,6 +41,18 @@ export const EditableInput = ({ cellData, onChange }) => (
   </td>
 );
 
+export const getAdditionalRow = (schema) => {
+  return () => {
+    const additionalRow = {
+      id: generateUUID(),
+    };
+    schema.forEach((entry) => {
+      additionalRow[entry.name] = entry.initialValue;
+    });
+    return additionalRow;
+  };
+};
+
 export const SkarTable = ({
   headers,
   rowSchema,
@@ -54,7 +67,7 @@ export const SkarTable = ({
         <TableHead headers={headers} />
         <tbody>TODO fill out</tbody>
       </table>
-      <AddButton onClick={onRowAdd} value="Add Entity Row" />
+      <AddButton onClick={onRowAdd} value="Add Row" />
     </div>
   );
 };

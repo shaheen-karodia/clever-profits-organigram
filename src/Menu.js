@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
-import RelationshipsTable from "./RelationshipsTable";
-import EntitiesTable from "./TableInput";
+import RelationshipsTable from "./HoldingsTable";
+import EntitiesTable from "./EntityTable";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
