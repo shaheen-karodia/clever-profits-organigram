@@ -101,6 +101,7 @@ export const SkarTable = ({
                   onCellChange={onCellChange}
                   rowSchema={rowSchema}
                 />
+                <DeleteCell onClick={() => onRowDelete(row)} value="X" />
               </tr>
             );
           })}

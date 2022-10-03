@@ -35,6 +35,16 @@ function HoldingsTable() {
     setHoldings(newHoldings);
   };
 
+  const onRowDelete = (holding) => {
+    const updatedHoldings = holdings.filter((h) => h.id !== holding.id);
+    setHoldings(updatedHoldings);
+  };
+
+  const onRowAdd = () => {
+    setHoldings([...holdings, getAdditionalHoldingRow()]);
+  };
+
+  console.log("HOLDINGS", holdings);
   return (
     <div>
       <h2>Holdings Table</h2>
@@ -44,6 +54,8 @@ function HoldingsTable() {
           rowSchema={ROW_SCHEMA}
           rows={holdings}
           onCellChange={onCellChange}
+          onRowDelete={onRowDelete}
+          onRowAdd={onRowAdd}
         />
       </p>
     </div>
