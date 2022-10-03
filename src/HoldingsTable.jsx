@@ -5,7 +5,7 @@ const HEADERS = ["Name", "Investment in", "Holdings %"];
 
 const ROW_SCHEMA = [
   { name: "name", initialValue: "", type: cellTypes.INPUT },
-  { name: "investmentIn", initialValue: "", type: cellTypes.INPUT },
+  { name: "investmentIn", initialValue: "", type: cellTypes.SELECT },
   { name: "holdings", initialValue: "", type: cellTypes.INPUT },
 ];
 
@@ -44,7 +44,6 @@ function HoldingsTable() {
     setHoldings([...holdings, getAdditionalHoldingRow()]);
   };
 
-  console.log("HOLDINGS", holdings);
   return (
     <div>
       <h2>Holdings Table</h2>

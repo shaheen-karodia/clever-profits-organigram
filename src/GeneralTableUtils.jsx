@@ -42,6 +42,39 @@ export const EditableInput = ({ cellData, onChange }) => (
   </td>
 );
 
+const EditableSelector = ({
+  // options,
+  // placeholder,
+  onChange,
+  cellData,
+}) => {
+  const options = ["buck", "wild"];
+  const placeholder = "placeholder";
+
+  return (
+    <div>
+      <select
+        id={cellData.id}
+        name={cellData.name}
+        value={cellData.value}
+        onChange={onChange}
+        // required
+      >
+        <option value="" disabled>
+          {placeholder}
+        </option>
+        {options.map((e) => {
+          return (
+            <option value={e} key={e}>
+              {e}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
+
 export const getAdditionalRow = (schema) => {
   return () => {
     const additionalRow = {
@@ -73,7 +106,12 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
           />
         );
       case cellTypes.SELECT:
-        return null;
+        return (
+          <EditableSelector
+            onChange={onCellChange}
+            cellData={{ type: name, value, id: row.id }}
+          />
+        );
       default:
         return null;
     }
@@ -111,32 +149,3 @@ export const SkarTable = ({
     </div>
   );
 };
-
-// const EditableSelector = ({
-//   options,
-//   placeholder,
-//   selectedOption,
-//   onChange,
-// }) => {
-//   return (
-//     <div>
-//       <select
-//         name=""
-//         value={selectedOption}
-//         onChange={(e) => onChange(e.target.value)}
-//         required
-//       >
-//         <option value="" disabled>
-//           {placeholder}
-//         </option>
-//         {options.map((e) => {
-//           return (
-//             <option value={e} key={e}>
-//               {e}
-//             </option>
-//           );
-//         })}
-//       </select>
-//     </div>
-//   );
-// };
