@@ -41,18 +41,15 @@ export const EditableInput = ({ rowId, property, value, onChange }) => (
 );
 
 const EditableSelector = ({
-  // options,
-  // placeholder,
+  options = [],
+  placeholder = "",
   onChange,
   rowId,
   property,
   value,
 }) => {
-  const options = ["buck", "wild"];
-  const placeholder = "placeholder";
-
   return (
-    <div>
+    <td>
       <select
         value={value}
         onChange={(e) => onChange({ rowId, property, value: e.target.value })}
@@ -69,7 +66,7 @@ const EditableSelector = ({
           );
         })}
       </select>
-    </div>
+    </td>
   );
 };
 
@@ -93,9 +90,9 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
   return Object.entries(rowExcludeId).map((entry) => {
     const property = entry[0];
     const value = entry[1];
-    const cellType = normalizedSchema[property].type;
+    const { type, config } = normalizedSchema[property];
 
-    switch (cellType) {
+    switch (type) {
       case cellTypes.INPUT:
         return (
           <EditableInput
@@ -112,6 +109,8 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
             onChange={onCellChange}
             property={property}
             value={value}
+            placeholder={config.placeholder}
+            options={config.options}
           />
         );
       default:

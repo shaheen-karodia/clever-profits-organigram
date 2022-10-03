@@ -4,8 +4,18 @@ import { SkarTable, cellTypes, getAdditionalRow } from "./GeneralTableUtils";
 const HEADERS = ["Name", "Investment in", "Holdings %"];
 
 const ROW_SCHEMA = [
-  { name: "name", initialValue: "", type: cellTypes.INPUT },
-  { name: "investmentIn", initialValue: "", type: cellTypes.SELECT },
+  {
+    name: "name",
+    initialValue: "",
+    type: cellTypes.SELECT,
+    config: { placeholder: "Select an Entity", options: ["hello", "there"] },
+  },
+  {
+    name: "investmentIn",
+    initialValue: "",
+    type: cellTypes.SELECT,
+    config: { placeholder: "Select an Entity", options: ["replace", "me"] },
+  },
   { name: "holdings", initialValue: "", type: cellTypes.INPUT },
 ];
 
