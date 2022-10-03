@@ -49,16 +49,14 @@ function HoldingsTable() {
   return (
     <div>
       <h2>Holdings Table</h2>
-      <p>
-        <SkarTable
-          headers={HEADERS}
-          rowSchema={ROW_SCHEMA}
-          rows={holdings}
-          onCellChange={onCellChange}
-          onRowDelete={onRowDelete}
-          onRowAdd={onRowAdd}
-        />
-      </p>
+      <SkarTable
+        headers={HEADERS}
+        rowSchema={ROW_SCHEMA}
+        rows={holdings}
+        onCellChange={onCellChange}
+        onRowDelete={onRowDelete}
+        onRowAdd={onRowAdd}
+      />
     </div>
   );
 }

@@ -1,154 +1,59 @@
 import React, { useState } from "react";
-import {
-  AddButton,
-  DeleteCell,
-  EditableInput,
-  generateUUID,
-  TableHead,
-  cellTypes,
-} from "./GeneralTableUtils";
 
-const ENTITY_TEMPLATE_OBJECT = {
-  // id: id,
-  name: "",
-  price: "",
-  category: "",
-  qty: "45",
-  entityType: "person",
-};
+import { SkarTable, cellTypes, getAdditionalRow } from "./GeneralTableUtils";
+
+const HEADERS = ["Name", "Type", "Passthrough"];
 
 const ROW_SCHEMA = [
-  { name: "name", initialValue: "john", type: cellTypes.INPUT },
-  { name: "price", initialValue: "", type: cellTypes.INPUT },
-  { name: "category", initialValue: "", type: cellTypes.INPUT },
-  { name: "qty", initialValue: "", type: cellTypes.INPUT },
-  { name: "entityType", initialValue: "person", type: cellTypes.INPUT },
-];
-
-const ENTITY_HEADERS = ["sname", "price", "category", "qty", "entity type"];
-
-const initialData = [
+  { name: "name", initialValue: "", type: cellTypes.INPUT },
   {
-    id: generateUUID(),
-    ...ENTITY_TEMPLATE_OBJECT,
+    name: "type",
+    initialValue: "there",
+    type: cellTypes.SELECT,
+    config: { placeholder: "Select an Entity", options: ["hello", "there"] },
   },
 ];
 
+const getAdditionalEntityRow = getAdditionalRow(ROW_SCHEMA);
+
 const EntitiesTable = () => {
-  const [entities, setEntities] = useState([...initialData]);
+  const [entities, setEntities] = useState([
+    getAdditionalEntityRow(),
+    getAdditionalEntityRow(),
+  ]);
 
-  const onRowDel = (entity) => {
-    const updatedEntities = entities.filter((e) => e.id !== entity.id);
-    setEntities(updatedEntities);
-  };
-
-  const onRowAdd = () => {
-    const id = generateUUID();
-    const entity = {
-      ...ENTITY_TEMPLATE_OBJECT,
-      id,
-    };
-
-    setEntities([...entities, entity]);
-  };
-
-  const onTableUpdate = (e) => {
-    const item = {
-      id: e.target.id,
-      name: e.target.name,
-      value: e.target.value,
-    };
-
-    const newEntities = entities.map((entity) => {
-      for (let key in entity) {
-        if (key == item.name && entity.id == item.id) {
-          entity[key] = item.value;
-        }
+  const onCellChange = ({ rowId, property, value }) => {
+    const newEntities = entities.map((e) => {
+      if (e.id === rowId) {
+        e[property] = value;
       }
-      return entity;
+      return e;
     });
 
     setEntities(newEntities);
   };
 
-  return (
-    <div>
-      <table className="table table-bordered">
-        <TableHead headers={ENTITY_HEADERS} />
-        <tbody>
-          {entities.map((entity) => (
-            <EntityRow
-              onChange={onTableUpdate}
-              entity={entity}
-              onDelEvent={onRowDel}
-              key={entity.id}
-            />
-          ))}
-        </tbody>
-      </table>
-      <AddButton onClick={onRowAdd} value="Add Entity Row" />
-    </div>
-  );
-};
+  const onRowDelete = (entity) => {
+    const updateEntities = entities.filter((e) => e.id !== entity.id);
+    setEntities(updateEntities);
+  };
 
-const EntityRow = ({ onDelEvent, entity, onChange }) => {
-  const onDelete = () => {
-    onDelEvent(entity);
+  const onRowAdd = () => {
+    setEntities([...entities, getAdditionalEntityRow()]);
   };
 
   return (
-    <tr className="eachRow">
-      <EditableInput
-        onChange={onChange}
-        cellData={{
-          type: "name",
-          value: entity.name,
-          id: entity.id,
-        }}
+    <div>
+      <h2>Entity Table</h2>
+      <SkarTable
+        headers={HEADERS}
+        rowSchema={ROW_SCHEMA}
+        rows={entities}
+        onCellChange={onCellChange}
+        onRowDelete={onRowDelete}
+        onRowAdd={onRowAdd}
       />
-      <EditableInput
-        onChange={onChange}
-        cellData={{
-          type: "price",
-          value: entity.price,
-          id: entity.id,
-        }}
-      />
-      <EditableInput
-        onChange={onChange}
-        cellData={{
-          type: "qty",
-          value: entity.qty,
-          id: entity.id,
-        }}
-      />
-      <EditableInput
-        onChange={onChange}
-        cellData={{
-          type: "category",
-          value: entity.category,
-          id: entity.id,
-        }}
-      />
-      <EditableDropDown
-        onChange={onChange}
-        cellData={{
-          type: "entityType",
-          value: entity.entityType,
-          id: entity.id,
-        }}
-      />
-      <DeleteCell onClick={onDelete} value="X" />
-    </tr>
-  );
-};
-
-const EditableDropDown = ({ cellData, onChange }) => {
-  console.log("cell", cellData);
-  return (
-    <td>
-      <p>{cellData.value}</p>
-    </td>
+    </div>
   );
 };
 
