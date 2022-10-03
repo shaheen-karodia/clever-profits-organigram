@@ -30,14 +30,12 @@ export const DeleteCell = ({ onClick, value }) => (
   </td>
 );
 
-export const EditableInput = ({ cellData, onChange }) => (
+export const EditableInput = ({ rowId, property, value, onChange }) => (
   <td>
     <input
       type="text"
-      name={cellData.type}
-      id={cellData.id}
-      value={cellData.value}
-      onChange={onChange}
+      value={value}
+      onChange={(e) => onChange({ rowId, property, value: e.target.value })}
     />
   </td>
 );
@@ -46,7 +44,9 @@ const EditableSelector = ({
   // options,
   // placeholder,
   onChange,
-  cellData,
+  rowId,
+  property,
+  value,
 }) => {
   const options = ["buck", "wild"];
   const placeholder = "placeholder";
@@ -54,10 +54,8 @@ const EditableSelector = ({
   return (
     <div>
       <select
-        id={cellData.id}
-        name={cellData.name}
-        value={cellData.value}
-        onChange={onChange}
+        value={value}
+        onChange={(e) => onChange({ rowId, property, value: e.target.value })}
         // required
       >
         <option value="" disabled>
@@ -93,23 +91,27 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
   const rowExcludeId = _.omit(row, "id");
 
   return Object.entries(rowExcludeId).map((entry) => {
-    const name = entry[0];
+    const property = entry[0];
     const value = entry[1];
-    const cellType = normalizedSchema[name].type;
+    const cellType = normalizedSchema[property].type;
 
     switch (cellType) {
       case cellTypes.INPUT:
         return (
           <EditableInput
+            rowId={rowId}
             onChange={onCellChange}
-            cellData={{ type: name, value, id: row.id }}
+            property={property}
+            value={value}
           />
         );
       case cellTypes.SELECT:
         return (
           <EditableSelector
+            rowId={rowId}
             onChange={onCellChange}
-            cellData={{ type: name, value, id: row.id }}
+            property={property}
+            value={value}
           />
         );
       default:

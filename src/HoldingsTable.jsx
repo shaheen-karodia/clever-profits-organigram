@@ -16,18 +16,10 @@ function HoldingsTable() {
     getAdditionalHoldingRow(),
   ]);
 
-  const onCellChange = (e) => {
-    const item = {
-      id: e.target.id,
-      name: e.target.name,
-      value: e.target.value,
-    };
-
+  const onCellChange = ({ rowId, property, value }) => {
     const newHoldings = holdings.map((h) => {
-      for (let key in h) {
-        if (key == item.name && h.id == item.id) {
-          h[key] = item.value;
-        }
+      if (h.id === rowId) {
+        h[property] = value;
       }
       return h;
     });
