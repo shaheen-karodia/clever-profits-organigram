@@ -75,8 +75,8 @@ const EditableSelector = ({
         </option>
         {options.map((e) => {
           return (
-            <option value={e} key={e}>
-              {e}
+            <option value={e.value} key={e.value}>
+              {e.display}
             </option>
           );
         })}
@@ -102,9 +102,11 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
   const rowId = row.id;
   const rowExcludeId = _.omit(row, "id");
 
-  return Object.entries(rowExcludeId).map((entry) => {
+  return Object.entries(rowExcludeId).map((entry, index) => {
     const property = entry[0];
     const value = entry[1];
+
+    const key = rowId + index;
     const { type, config } = normalizedSchema[property];
     switch (type) {
       case cellTypes.INPUT:
@@ -114,6 +116,7 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
             onChange={onCellChange}
             property={property}
             value={value}
+            key={key}
           />
         );
       case cellTypes.SELECT:
@@ -125,6 +128,7 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
             value={value}
             placeholder={config.placeholder}
             options={config.options}
+            key={key}
           />
         );
       case cellTypes.CHECK_BOX:
@@ -134,6 +138,7 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
             onChange={onCellChange}
             property={property}
             value={value}
+            key={key}
           />
         );
       default:

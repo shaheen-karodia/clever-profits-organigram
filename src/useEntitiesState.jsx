@@ -10,7 +10,13 @@ const ROW_SCHEMA = [
     name: "type",
     initialValue: "there",
     type: cellTypes.SELECT,
-    config: { placeholder: "Select an Entity", options: ["hello", "there"] },
+    config: {
+      placeholder: "Select an Entity",
+      options: [
+        { display: "hello", value: "1" },
+        { display: "there", value: "2" },
+      ],
+    },
   },
   {
     name: "passthrough",

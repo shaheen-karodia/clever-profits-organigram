@@ -8,13 +8,25 @@ const ROW_SCHEMA = [
     name: "name",
     initialValue: "",
     type: cellTypes.SELECT,
-    config: { placeholder: "Select an Entity", options: ["hello", "there"] }, //TODO how do we make these conditional
+    config: {
+      placeholder: "Select an Entity",
+      options: [
+        { display: "hello", value: "1" },
+        { display: "there", value: "2" },
+      ],
+    },
   },
   {
     name: "investmentIn",
     initialValue: "",
     type: cellTypes.SELECT,
-    config: { placeholder: "Select an Entity", options: ["replace", "me"] }, //TODO how do we make these conditional
+    config: {
+      placeholder: "Select an Entity",
+      options: [
+        { display: "hello", value: "1" },
+        { display: "there", value: "2" },
+      ],
+    },
   },
   { name: "holdings", initialValue: "", type: cellTypes.INPUT },
 ];
