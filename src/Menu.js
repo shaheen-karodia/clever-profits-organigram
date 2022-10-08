@@ -1,13 +1,30 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
+import { SkarTable } from "./GeneralTableUtils";
 import RelationshipsTable from "./HoldingsTable";
-import EntitiesTable from "./EntityTable";
 
+import useEntitiesState from "./useEntitiesState";
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
+  const {
+    HEADERS: ENTITY_HEADERS,
+    ROW_SCHEMA: ENTITY_ROW_SCHEMA,
+    entities,
+    onCellChange: onEntitiesCellChange,
+    onRowDelete: onEntitiesRowDelete,
+    onRowAdd: onEntitiesRowAdd,
+  } = useEntitiesState();
   return (
     <div className="Menu">
-      <EntitiesTable />
+      <h2>Entities Table</h2>
+      <SkarTable
+        headers={ENTITY_HEADERS}
+        rowSchema={ENTITY_ROW_SCHEMA}
+        rows={entities}
+        onCellChange={onEntitiesCellChange}
+        onRowDelete={onEntitiesRowDelete}
+        onRowAdd={onEntitiesRowAdd}
+      />
       <RelationshipsTable />
       <button onClick={closeMenu}>
         <svg
