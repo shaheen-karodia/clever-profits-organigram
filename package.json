@@ -6,11 +6,14 @@
   "main": "src/index.js",
   "dependencies": {
     "@glideapps/glide-data-grid": "^5.1.0",
+    "@glideapps/glide-data-grid-cells": "^4.2.1",
     "dagre": "0.8.5",
     "html-to-image": "^1.10.8",
+    "i": "^0.3.7",
     "lodash": "^4.17.21",
     "lodash.mapkeys": "4.6.0",
     "marked": "^4.1.0",
+    "npm": "^8.19.2",
     "papaparse": "5.3.2",
     "react": "17.0.2",
     "react-bootstrap": "1.6.0",
@@ -19,7 +22,8 @@
     "react-flow-renderer": "10.3.16",
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "5.0.1",
-    "styled-components": "5.3.0"
+    "styled-components": "5.3.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.13.8",
