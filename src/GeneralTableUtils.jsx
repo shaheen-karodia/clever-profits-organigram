@@ -4,6 +4,7 @@ import _ from "lodash";
 export const cellTypes = {
   INPUT: "INPUT",
   SELECT: "SELECT",
+  CHECK_BOX: "CHECK_BOX",
 };
 
 export const generateUUID = () => uuidv4();
@@ -39,6 +40,20 @@ export const EditableInput = ({ rowId, property, value, onChange }) => (
     />
   </td>
 );
+
+export const EditableCheckBox = ({ rowId, property, value, onChange }) => {
+  return (
+    <td>
+      <input
+        type="checkbox"
+        checked={value}
+        onChange={() => {
+          onChange({ rowId, property, value: !value });
+        }}
+      />
+    </td>
+  );
+};
 
 const EditableSelector = ({
   options = [],
@@ -91,7 +106,6 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
     const property = entry[0];
     const value = entry[1];
     const { type, config } = normalizedSchema[property];
-
     switch (type) {
       case cellTypes.INPUT:
         return (
@@ -111,6 +125,15 @@ export const RenderRow = ({ row, rowSchema, onCellChange }) => {
             value={value}
             placeholder={config.placeholder}
             options={config.options}
+          />
+        );
+      case cellTypes.CHECK_BOX:
+        return (
+          <EditableCheckBox
+            rowId={rowId}
+            onChange={onCellChange}
+            property={property}
+            value={value}
           />
         );
       default:

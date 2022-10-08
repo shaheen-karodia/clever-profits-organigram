@@ -12,6 +12,11 @@ const ROW_SCHEMA = [
     type: cellTypes.SELECT,
     config: { placeholder: "Select an Entity", options: ["hello", "there"] },
   },
+  {
+    name: "passthrough",
+    initialValue: true,
+    type: cellTypes.CHECK_BOX,
+  },
 ];
 
 const getAdditionalEntityRow = getAdditionalRow(ROW_SCHEMA);
