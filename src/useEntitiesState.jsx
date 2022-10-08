@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { cellTypes, getAdditionalRow } from "./GeneralTableUtils";
+import { cellTypes, getAdditionalRow, generateUUID } from "./GeneralTableUtils";
 
 const HEADERS = ["Name", "Type", "Passthrough"];
 
@@ -13,8 +13,11 @@ const ROW_SCHEMA = [
     config: {
       placeholder: "Select an Entity",
       options: [
-        { display: "hello", value: "1" },
-        { display: "there", value: "2" },
+        { display: "Individual", value: generateUUID() },
+        { display: "Partnership", value: generateUUID() },
+        { display: "LLC", value: generateUUID() },
+        { display: "Trust", value: generateUUID() },
+        { display: "S-Corp", value: generateUUID() },
       ],
     },
   },
