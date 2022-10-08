@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { SkarTable } from "./GeneralTableUtils";
-import RelationshipsTable from "./HoldingsTable";
+import useHoldingsState from "./useHoldingsState";
 
 import useEntitiesState from "./useEntitiesState";
 function Menu() {
@@ -14,6 +14,15 @@ function Menu() {
     onRowDelete: onEntitiesRowDelete,
     onRowAdd: onEntitiesRowAdd,
   } = useEntitiesState();
+
+  const {
+    onCellChange: onHoldingsCellChange,
+    onRowDelete: onHoldingsRowDelete,
+    onRowAdd: onHoldingsRowAdd,
+    holdings,
+    ROW_SCHEMA: HOLDINGS_ROW_SCHEMA,
+    HEADERS: HOLDING_ROW_HEADERS,
+  } = useHoldingsState();
   return (
     <div className="Menu">
       <h2>Entities Table</h2>
@@ -25,7 +34,14 @@ function Menu() {
         onRowDelete={onEntitiesRowDelete}
         onRowAdd={onEntitiesRowAdd}
       />
-      <RelationshipsTable />
+      <SkarTable
+        headers={HOLDING_ROW_HEADERS}
+        rowSchema={HOLDINGS_ROW_SCHEMA}
+        rows={holdings}
+        onCellChange={onHoldingsCellChange}
+        onRowDelete={onHoldingsRowDelete}
+        onRowAdd={onHoldingsRowAdd}
+      />
       <button onClick={closeMenu}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

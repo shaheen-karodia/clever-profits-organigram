@@ -22,12 +22,7 @@ const ROW_SCHEMA = [
 const getAdditionalHoldingRow = getAdditionalRow(ROW_SCHEMA);
 
 function useHoldingsState() {
-  const [holdings, setHoldings] = useState([
-    getAdditionalHoldingRow(),
-    getAdditionalHoldingRow(),
-    getAdditionalHoldingRow(),
-    getAdditionalHoldingRow(),
-  ]);
+  const [holdings, setHoldings] = useState([getAdditionalHoldingRow()]);
 
   const onCellChange = ({ rowId, property, value }) => {
     const newHoldings = holdings.map((h) => {
