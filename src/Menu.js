@@ -43,6 +43,17 @@ function Menu() {
     HEADERS: HOLDING_ROW_HEADERS,
   } = useHoldingsState(entitiesOptions);
 
+  /***
+   * Ensures that the user is aware that they will be deleting some of the dependent holdings below
+   */
+  const onEntitiesRowDeleteCordinator = (data) => {
+    const confirmationText =
+      "Deleting an entity will result in a dependent holding being delete";
+    if (confirm(confirmationText)) {
+      onEntitiesRowDelete(data);
+    }
+  };
+
   return (
     <div className="Menu">
       <h2>Entities Table</h2>
@@ -51,9 +62,11 @@ function Menu() {
         rowSchema={ENTITY_ROW_SCHEMA}
         rows={entities}
         onCellChange={onEntitiesCellChange}
-        onRowDelete={onEntitiesRowDelete}
+        onRowDelete={onEntitiesRowDeleteCordinator}
         onRowAdd={onEntitiesRowAdd}
       />
+      <br />
+      <h2>Holdings Table</h2>
       <SkarTable
         headers={HOLDING_ROW_HEADERS}
         rowSchema={HOLDINGS_ROW_SCHEMA}
