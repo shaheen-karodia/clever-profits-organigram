@@ -4,16 +4,18 @@ import { cellTypes, getAdditionalRow, generateUUID } from "./GeneralTableUtils";
 
 const HEADERS = ["Name", "Type", "Passthrough"];
 
+const IndividualValue = generateUUID();
+
 const ROW_SCHEMA = [
-  { name: "name", initialValue: "", type: cellTypes.INPUT },
+  { name: "entityName", initialValue: "", type: cellTypes.INPUT },
   {
-    name: "type",
-    initialValue: "there",
+    name: "entityType",
+    initialValue: IndividualValue,
     type: cellTypes.SELECT,
     config: {
       placeholder: "Select an Entity",
       options: [
-        { display: "Individual", value: generateUUID() },
+        { display: "Individual", value: IndividualValue },
         { display: "Partnership", value: generateUUID() },
         { display: "LLC", value: generateUUID() },
         { display: "Trust", value: generateUUID() },
@@ -55,7 +57,8 @@ function useEntitiesState() {
   };
 
   const onRowAdd = () => {
-    setEntities([...entities, getAdditionalEntityRow()]);
+    const additionalRow = getAdditionalEntityRow();
+    setEntities([...entities, additionalRow]);
   };
 
   return { onCellChange, onRowDelete, onRowAdd, entities, ROW_SCHEMA, HEADERS };

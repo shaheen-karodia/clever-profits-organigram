@@ -24,9 +24,9 @@ const useExcelFetcher = () => {
       error: function (err) {
         setError(true);
         setHoldingLoading(false);
-        console.log("holdings", holdings);
-        console.log(err);
-      }
+        // console.log("holdings", holdings);
+        // console.log(err);
+      },
     });
   }, []);
 
@@ -36,14 +36,14 @@ const useExcelFetcher = () => {
       header: true,
       complete: function (results) {
         setEntities(results.data);
-        setEntitiesLoading(false);
-        console.log("entities", entities);
+        // setEntitiesLoading(false);
+        // console.log("entities", entities);
       },
       error: function (err) {
         setError(true);
         setEntitiesLoading(false);
-        console.log(err);
-      }
+        // console.log(err);
+      },
     });
   }, []);
 
@@ -51,7 +51,7 @@ const useExcelFetcher = () => {
     holdings,
     entities,
     error,
-    loading: holdingLoading || entitiesLoading
+    loading: holdingLoading || entitiesLoading,
   };
 };
 

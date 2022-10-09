@@ -5,7 +5,7 @@ const HEADERS = ["Name", "Investment in", "Holdings %"];
 
 const ROW_SCHEMA = [
   {
-    name: "name",
+    name: "fromEntityId",
     initialValue: "",
     type: cellTypes.SELECT,
     config: {
@@ -17,7 +17,7 @@ const ROW_SCHEMA = [
     },
   },
   {
-    name: "investmentIn",
+    name: "toEntityId",
     initialValue: "",
     type: cellTypes.SELECT,
     config: {
@@ -28,7 +28,7 @@ const ROW_SCHEMA = [
       ],
     },
   },
-  { name: "holdings", initialValue: "", type: cellTypes.INPUT },
+  { name: "percentageHoldings", initialValue: "", type: cellTypes.INPUT },
 ];
 
 const getAdditionalHoldingRow = getAdditionalRow(ROW_SCHEMA);
