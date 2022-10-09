@@ -93,6 +93,7 @@ export const getAdditionalRow = (schema) => {
     schema.forEach((entry) => {
       additionalRow[entry.name] = entry.initialValue;
     });
+
     return additionalRow;
   };
 };
