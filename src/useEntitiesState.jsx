@@ -61,7 +61,27 @@ function useEntitiesState() {
     setEntities([...entities, additionalRow]);
   };
 
-  return { onCellChange, onRowDelete, onRowAdd, entities, ROW_SCHEMA, HEADERS };
+  /**
+   * Method for making an Entities Dropdown to be used by the Holdings table
+   */
+  const getEntityOptions = () => {
+    return entities.map((e) => {
+      return {
+        value: e.id,
+        display: e.entityName,
+      };
+    });
+  };
+
+  return {
+    onCellChange,
+    onRowDelete,
+    onRowAdd,
+    entities,
+    ROW_SCHEMA,
+    HEADERS,
+    getEntityOptions,
+  };
 }
 
 export default useEntitiesState;

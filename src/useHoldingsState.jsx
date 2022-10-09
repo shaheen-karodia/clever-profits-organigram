@@ -1,39 +1,32 @@
 import React, { useState } from "react";
 import { cellTypes, getAdditionalRow } from "./GeneralTableUtils";
 
-const HEADERS = ["Name", "Investment in", "Holdings %"];
+function useHoldingsState(entitiesOptions) {
+  const HEADERS = ["Name", "Investment in", "Holdings %"];
 
-const ROW_SCHEMA = [
-  {
-    name: "fromEntityId",
-    initialValue: "",
-    type: cellTypes.SELECT,
-    config: {
-      placeholder: "Select an Entity",
-      options: [
-        { display: "hello", value: "1" },
-        { display: "there", value: "2" },
-      ],
+  const ROW_SCHEMA = [
+    {
+      name: "fromEntityId",
+      initialValue: "",
+      type: cellTypes.SELECT,
+      config: {
+        placeholder: "Select an Entity",
+        options: entitiesOptions,
+      },
     },
-  },
-  {
-    name: "toEntityId",
-    initialValue: "",
-    type: cellTypes.SELECT,
-    config: {
-      placeholder: "Select an Entity",
-      options: [
-        { display: "hello", value: "1" },
-        { display: "there", value: "2" },
-      ],
+    {
+      name: "toEntityId",
+      initialValue: "",
+      type: cellTypes.SELECT,
+      config: {
+        placeholder: "Select an Entity",
+        options: entitiesOptions,
+      },
     },
-  },
-  { name: "percentageHoldings", initialValue: "", type: cellTypes.INPUT },
-];
+    { name: "percentageHoldings", initialValue: "", type: cellTypes.INPUT },
+  ];
 
-const getAdditionalHoldingRow = getAdditionalRow(ROW_SCHEMA);
-
-function useHoldingsState() {
+  const getAdditionalHoldingRow = getAdditionalRow(ROW_SCHEMA);
   const [holdings, setHoldings] = useState([getAdditionalHoldingRow()]);
 
   const onCellChange = ({ rowId, property, value }) => {
