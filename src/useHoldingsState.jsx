@@ -40,8 +40,13 @@ function useHoldingsState(entitiesOptions) {
     setHoldings(newHoldings);
   };
 
-  const onRowDelete = (holding) => {
-    const updatedHoldings = holdings.filter((h) => h.id !== holding.id);
+  const onRowDelete = (id) => {
+    const updatedHoldings = holdings.filter((h) => h.id !== id);
+    setHoldings(updatedHoldings);
+  };
+
+  const onBulkRowDelete = (ids) => {
+    const updatedHoldings = holdings.filter((h) => !ids.includes(h.id));
     setHoldings(updatedHoldings);
   };
 
@@ -49,7 +54,15 @@ function useHoldingsState(entitiesOptions) {
     setHoldings([...holdings, getAdditionalHoldingRow()]);
   };
 
-  return { onCellChange, onRowDelete, onRowAdd, holdings, ROW_SCHEMA, HEADERS };
+  return {
+    onCellChange,
+    onRowDelete,
+    onBulkRowDelete,
+    onRowAdd,
+    holdings,
+    ROW_SCHEMA,
+    HEADERS,
+  };
 }
 
 export default useHoldingsState;

@@ -9,7 +9,7 @@ const IndividualValue = generateUUID();
 const ROW_SCHEMA = [
   { name: "entityName", initialValue: "", type: cellTypes.INPUT },
   {
-    name: "entityType",
+    name: "entityTypeId",
     initialValue: IndividualValue,
     type: cellTypes.SELECT,
     config: {
@@ -32,13 +32,18 @@ const ROW_SCHEMA = [
 
 const getAdditionalEntityRow = getAdditionalRow(ROW_SCHEMA);
 
+const a = getAdditionalEntityRow();
+a.entityName = "tasneem";
+const b = getAdditionalEntityRow();
+b.entityName = "Shaheen";
+const c = getAdditionalEntityRow();
+c.entityName = "JL";
+const d = getAdditionalEntityRow();
+d.entityName = "Onyx";
+const initialData = [a, b, c, d];
+
 function useEntitiesState() {
-  const [entities, setEntities] = useState([
-    getAdditionalEntityRow(),
-    getAdditionalEntityRow(),
-    getAdditionalEntityRow(),
-    getAdditionalEntityRow(),
-  ]);
+  const [entities, setEntities] = useState(initialData);
 
   const onCellChange = ({ rowId, property, value }) => {
     const newEntities = entities.map((e) => {
@@ -51,8 +56,8 @@ function useEntitiesState() {
     setEntities(newEntities);
   };
 
-  const onRowDelete = (entity) => {
-    const updateEntities = entities.filter((e) => e.id !== entity.id);
+  const onRowDelete = (id) => {
+    const updateEntities = entities.filter((e) => e.id !== id);
     setEntities(updateEntities);
   };
 
