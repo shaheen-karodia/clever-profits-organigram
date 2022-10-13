@@ -1,26 +1,19 @@
 import React, { useState } from "react";
+import { ENTITY_INDIVIDUAL_VALUE, ENTITY_TYPE_OPTIONS } from "./entityType";
 
 import { cellTypes, getAdditionalRow, generateUUID } from "./GeneralTableUtils";
 
 const HEADERS = ["Name", "Type", "Passthrough"];
 
-const IndividualValue = generateUUID();
-
 const ROW_SCHEMA = [
   { name: "entityName", initialValue: "", type: cellTypes.INPUT },
   {
     name: "entityTypeId",
-    initialValue: IndividualValue,
+    initialValue: ENTITY_INDIVIDUAL_VALUE,
     type: cellTypes.SELECT,
     config: {
       placeholder: "Select an Entity",
-      options: [
-        { display: "Individual", value: IndividualValue },
-        { display: "Partnership", value: generateUUID() },
-        { display: "LLC", value: generateUUID() },
-        { display: "Trust", value: generateUUID() },
-        { display: "S-Corp", value: generateUUID() },
-      ],
+      options: ENTITY_TYPE_OPTIONS,
     },
   },
   {
