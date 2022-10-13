@@ -4,7 +4,7 @@ import NodePlotter from "./NodePlotter";
 import styled from "styled-components";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { Container, Row, Col } from "react-bootstrap";
-import { getNodes, getEdges } from "./ExcelFetcher/dataTransformer";
+import { getNodes, getEdges } from "./dataTransformer";
 import DownloadButton from "./DownloadButton";
 
 const ContainerDiv = styled(Container)`

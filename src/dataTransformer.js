@@ -8,7 +8,7 @@ export const getNodes = (entities) => {
       id: e.id,
       data: { label: e.name },
       position,
-      type: e.type
+      type: e.type,
     };
   });
 };
@@ -27,7 +27,7 @@ export const getEdges = (holdings, entities) => {
       label: "50%",
       labelStyle: { fill: "red", fontWeight: 700 },
       type: "floating",
-      markerEnd: { type: MarkerType.ArrowClosed }
+      markerEnd: { type: MarkerType.ArrowClosed },
     };
   });
 };

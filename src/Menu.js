@@ -62,6 +62,7 @@ function Menu() {
     }
   };
 
+  console.log("entities", JSON.stringify(entities));
   console.log("holdings", holdings);
   return (
     <div className="Menu">
