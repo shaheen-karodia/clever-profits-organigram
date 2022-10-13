@@ -8,17 +8,8 @@ import CloseMenuButton from "./CloseMenuButton";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
-  const {
-    HEADERS: ENTITY_HEADERS,
-    ROW_SCHEMA: ENTITY_ROW_SCHEMA,
-    entities,
-    onCellChange: onEntitiesCellChange,
-    onRowDelete: onEntitiesRowDelete,
-    onRowAdd: onEntitiesRowAdd,
-    getEntityOptions,
-  } = useEntitiesState();
-
-  const entitiesOptions = getEntityOptions();
+  const entityStore = useEntitiesState();
+  const entitiesOptions = entityStore.getEntityOptions();
   const {
     onCellChange: onHoldingsCellChange,
     onRowDelete: onHoldingsRowDelete,
@@ -40,25 +31,26 @@ function Menu() {
       "Deleting an entity will result in a dependent holding being delete";
 
     if (dependentHoldings.length === 0) {
-      onEntitiesRowDelete(id);
+      entityStore.onRowDelete(id);
     } else if (confirm(confirmationText)) {
       onBulkEntityRowDelete(dependentHoldings.map((h) => h.id));
-      onEntitiesRowDelete(id);
+      entityStore.onRowDelete(id);
     }
   };
 
-  console.log("entities", JSON.stringify(entities));
+  console.log("entities", JSON.stringify(entityStore.entities));
   console.log("holdings", holdings);
+  console.log("entityoptions", entitiesOptions);
   return (
     <div className="Menu">
       <h2>Entities Table</h2>
       <SkarTable
-        headers={ENTITY_HEADERS}
-        rowSchema={ENTITY_ROW_SCHEMA}
-        rows={entities}
-        onCellChange={onEntitiesCellChange}
+        headers={entityStore.HEADERS}
+        rowSchema={entityStore.ROW_SCHEMA}
+        rows={entityStore.entities}
+        onCellChange={entityStore.onCellChange}
         onRowDelete={onEntitiesRowDeleteCordinator}
-        onRowAdd={onEntitiesRowAdd}
+        onRowAdd={entityStore.onRowAdd}
       />
       <br />
       <h2>Holdings Table</h2>
