@@ -4,7 +4,6 @@ import NodePlotter from "./NodePlotter";
 import styled from "styled-components";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { Container, Row, Col } from "react-bootstrap";
-import useExcelFetcher from "./ExcelFetcher/useExcelFetcher";
 import { getNodes, getEdges } from "./ExcelFetcher/dataTransformer";
 import DownloadButton from "./DownloadButton";
 
@@ -20,13 +19,11 @@ const DemoArea = styled(Col)`
 
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
-  // const { loading, error, entities, holdings } = useExcelFetcher();
 
-  // if (loading) return <div>loading</div>;
-  // if (error) return <div>error</div>;
-
-  // const initialNodes = getNodes(entities);
-  // const initialEdges = getEdges(holdings, entities);
+  const holdings = [];
+  const entities = [];
+  const initialNodes = getNodes(entities);
+  const initialEdges = getEdges(holdings, entities);
 
   return (
     <>
@@ -36,12 +33,12 @@ export default function App() {
       {/* <DownloadButton /> */}
       <ContainerDiv fluid>
         <Row>
-          {/* <DemoArea>
+          <DemoArea>
             <NodePlotter
               initialNodes={initialNodes}
               initialEdges={initialEdges}
             />
-          </DemoArea> */}
+          </DemoArea>
         </Row>
       </ContainerDiv>
     </>
