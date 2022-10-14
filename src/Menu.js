@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { SkarTable } from "./GeneralTableUtils";
-import useHoldingsState from "./useHoldingsState";
-
-import useEntitiesState from "./useEntitiesState";
+import { StoreContext } from "./StoreProvider";
 import CloseMenuButton from "./CloseMenuButton";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
-  const entityStore = useEntitiesState();
-  const entitiesOptions = entityStore.getEntityOptions();
-  const holdingStore = useHoldingsState(entitiesOptions);
+  const { entityStore, holdingStore } = useContext(StoreContext);
 
   /***
    * Ensures that the user is aware that they will be deleting some of the dependent holdings below
@@ -25,14 +21,14 @@ function Menu() {
     if (dependentHoldings.length === 0) {
       entityStore.onRowDelete(id);
     } else if (confirm(confirmationText)) {
-      holdingStore.onBulkEntityRowDelete(dependentHoldings.map((h) => h.id));
+      holdingStore.onBulkRowDelete(dependentHoldings.map((h) => h.id));
       entityStore.onRowDelete(id);
     }
   };
 
-  console.log("entities", JSON.stringify(entityStore.entities));
+  console.log("entitiesssssss", JSON.stringify(entityStore.entities));
   console.log("holdings", holdingStore.holdings);
-  console.log("entityoptions", entitiesOptions);
+
   return (
     <div className="Menu">
       <h2>Entities Table</h2>
