@@ -25,6 +25,7 @@ export default function App() {
   const initialNodes = getNodes(entityStore.entities);
   const initialEdges = getEdges(holdingStore.holdings);
 
+  const [title] = titleStore;
   return (
     <>
       <div className="action-button-wrapper">
@@ -33,6 +34,7 @@ export default function App() {
         </button>
         <DownloadButton />
       </div>
+      <h2 className="project-title">{title}</h2>
 
       {/* <h3>{titleStore.title}</h3> */}
       <ContainerDiv fluid>

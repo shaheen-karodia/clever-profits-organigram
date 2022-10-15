@@ -93,6 +93,17 @@
 }
 
 /*******************
+  PROJECT TIEL
+********************/
+.project-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  margin-top: 0;
+}
+
+/*******************
   MENU 
 ********************/
 .Menu {
