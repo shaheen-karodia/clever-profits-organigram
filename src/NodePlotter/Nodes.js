@@ -22,7 +22,7 @@ const DataLabel = ({ label }) => (
       style={{
         fontFamily: "monospace",
         fontWeight: "bold",
-        color: "white",
+        color: "black",
         fontSize: "12px",
       }}
     >
@@ -74,17 +74,29 @@ export const LLCNode = memo(({ data }) => {
   );
 });
 
+//PENTAGON
 export const TrustNode = memo(({ data }) => {
-  return <Wrapper label={data.label}>Pentagon: Trust</Wrapper>;
+  return (
+    <Wrapper label={data.label}>
+      <svg width="70" height="70" style={svgStyleObj}>
+        <path
+          d="M 35 0 L 70 26.737 L 56.631 70 L 13.369 70 L 0 26.737 L 35 0 Z"
+          fill="#6ede87"
+          strokeWidth="2"
+          stroke="#fff"
+        ></path>
+      </svg>
+    </Wrapper>
+  );
 });
 
-// TODO: this is a parallelogram not a trapezoid
+//TRAPEZOID
 export const SCorpNode = memo(({ data }) => {
   return (
     <Wrapper label={data.label}>
       <svg width="150" height="70" style={svgStyleObj}>
         <path
-          d="M0,70 L37.5,0 L150,0 L112.5,70 z"
+          d="M 0 70 L 30 0 L 120 0 L 150 70 L 0 70 Z"
           fill="#668de3"
           strokeWidth="2"
           stroke="#fff"
