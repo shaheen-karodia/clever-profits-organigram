@@ -61,6 +61,9 @@
   text-align: center;
 }
 
+.simple-floatingedges .react-flow__edge-path {
+  stroke: black;
+}
 .person-wrapper {
   display: flex;
   flex-direction: column;

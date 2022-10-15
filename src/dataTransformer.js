@@ -22,8 +22,8 @@ export const getEdges = (holdings) => {
       source: sourceId,
       target: targetId,
       animated: false,
-      label: "50%",
-      labelStyle: { fill: "red", fontWeight: 700 },
+      label: h.percentageHoldings,
+      labelStyle: { fill: "black", fontWeight: 700 },
       type: "floating",
       markerEnd: { type: MarkerType.ArrowClosed },
     };
