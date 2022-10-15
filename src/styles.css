@@ -78,29 +78,17 @@
   border-radius: 5px;
   font-weight: 700;
   cursor: pointer;
+  margin: 0 5px;
 }
 
 .primary-btn:hover {
   opacity: 0.9;
 }
 
-/*
-Download Button 
-**/
-.download-button {
+.action-button-wrapper {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 10;
-}
-
-/*
- Menu Button 
-**/
-.menu-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   z-index: 10;
 }
 

@@ -6,7 +6,8 @@ import CloseMenuButton from "./CloseMenuButton";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
-  const { entityStore, holdingStore } = useContext(StoreContext);
+  const { entityStore, holdingStore, titleStore } = useContext(StoreContext);
+  const [title, setTitle] = titleStore;
 
   /***
    * Ensures that the user is aware that they will be deleting some of the dependent holdings below
@@ -31,6 +32,14 @@ function Menu() {
 
   return (
     <div className="Menu">
+      <h2>Title</h2>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <br />
+      <br />
       <h2>Entities Table</h2>
       <SkarTable
         headers={entityStore.HEADERS}
@@ -40,6 +49,7 @@ function Menu() {
         onRowDelete={onEntitiesRowDeleteCordinator}
         onRowAdd={entityStore.onRowAdd}
       />
+      <br />
       <br />
       <h2>Holding Table</h2>
       <SkarTable

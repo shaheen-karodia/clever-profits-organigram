@@ -15,10 +15,15 @@ const IndexComp = () => {
   const entityStore = useEntitiesState();
   const entitiesOptions = entityStore.getEntityOptions();
   const holdingStore = useHoldingsState(entitiesOptions);
+  const titleStore = useState("");
 
   return (
     <StrictMode>
-      <StoreProvider entityStore={entityStore} holdingStore={holdingStore}>
+      <StoreProvider
+        entityStore={entityStore}
+        holdingStore={holdingStore}
+        titleStore={titleStore}
+      >
         <MenuProvider MenuComponent={Menu} animation="push" width={"900px"}>
           <App />
         </MenuProvider>

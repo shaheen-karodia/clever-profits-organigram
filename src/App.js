@@ -20,17 +20,21 @@ const DemoArea = styled(Col)`
 
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
-  const { entityStore, holdingStore } = useContext(StoreContext);
+  const { entityStore, holdingStore, titleStore } = useContext(StoreContext);
 
   const initialNodes = getNodes(entityStore.entities);
   const initialEdges = getEdges(holdingStore.holdings);
 
   return (
     <>
-      <button onClick={toggleMenu} className="primary-btn menu-button">
-        Toggle Menu
-      </button>
-      {/* <DownloadButton /> */}
+      <div className="action-button-wrapper">
+        <button onClick={toggleMenu} className="primary-btn menu-button">
+          Toggle Menu
+        </button>
+        <DownloadButton />
+      </div>
+
+      {/* <h3>{titleStore.title}</h3> */}
       <ContainerDiv fluid>
         <Row>
           <DemoArea>

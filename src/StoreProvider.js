@@ -8,10 +8,10 @@ const StoreContext = React.createContext({});
  * this returns an object to be used as as a styles object
  */
 const StoreProvider = (props) => {
-  const { entityStore, holdingStore, children } = props;
+  const { entityStore, holdingStore, titleStore, children } = props;
 
   return (
-    <StoreContext.Provider value={{ entityStore, holdingStore }}>
+    <StoreContext.Provider value={{ entityStore, holdingStore, titleStore }}>
       {children}
     </StoreContext.Provider>
   );
