@@ -27,7 +27,7 @@ export default function App() {
 
   const [title] = titleStore;
   return (
-    <>
+    <div className="screenshot-area">
       <div className="action-button-wrapper">
         <button onClick={toggleMenu} className="primary-btn menu-button">
           Toggle Menu
@@ -47,6 +47,6 @@ export default function App() {
           </DemoArea>
         </Row>
       </ContainerDiv>
-    </>
+    </div>
   );
 }

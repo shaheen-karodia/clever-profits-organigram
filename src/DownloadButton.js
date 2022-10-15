@@ -11,12 +11,13 @@ function downloadImage(dataUrl) {
 
 function DownloadButton() {
   const onClick = () => {
-    toPng(document.querySelector(".react-flow"), {
+    toPng(document.querySelector(".screenshot-area"), {
       filter: (node) => {
         // we don't want to add the minimap and the controls to the image
         if (
           node?.classList?.contains("react-flow__minimap") ||
           node?.classList?.contains("react-flow__controls") ||
+          node?.classList?.contains("action-button-wrapper") ||
           node.id == "pattern-0"
         ) {
           return false;

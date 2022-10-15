@@ -34,7 +34,7 @@ const initialData = [
   },
   {
     id: "57870f8f-756a-4a62-8d12-d2254562bb56",
-    entityName: "Shaheen",
+    entityName: "Shaheen a reasonably long name",
     entityTypeId: "partnership",
     passthrough: true,
   },
