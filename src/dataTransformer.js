@@ -6,9 +6,9 @@ export const getNodes = (entities) => {
   return entities.map((e) => {
     return {
       id: e.id,
-      data: { label: e.name },
+      data: { label: e.entityName, passthrough: e.passthrough },
       position,
-      type: e.type,
+      type: e.entityTypeId,
     };
   });
 };

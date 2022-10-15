@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { Container, Row, Col } from "react-bootstrap";
 import { getNodes, getEdges } from "./dataTransformer";
+import { StoreContext } from "./StoreProvider";
 import DownloadButton from "./DownloadButton";
 
 const ContainerDiv = styled(Container)`
@@ -19,10 +20,11 @@ const DemoArea = styled(Col)`
 
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
+  const { entityStore, holdingStore } = useContext(StoreContext);
 
   const holdings = [];
   const entities = [];
-  const initialNodes = getNodes(entities);
+  const initialNodes = getNodes(entityStore.entities);
   const initialEdges = getEdges(holdings, entities);
 
   return (
