@@ -72,7 +72,7 @@ const NodeAsHandleFlow = ({ initialNodes, initialEdges }) => {
         fitViewOptions={fitViewOptions}
         connectionMode={ConnectionMode.Loose}
       >
-        <Background />
+        <Background style={{ backgroundColor: "white" }} />
       </ReactFlow>
     </div>
   );
