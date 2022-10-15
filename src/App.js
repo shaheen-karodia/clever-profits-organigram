@@ -15,7 +15,7 @@ const ContainerDiv = styled(Container)`
 
 const DemoArea = styled(Col)`
   width: 100%;
-  height: 85vh;
+  height: calc(100vh - 16px);
 `;
 
 export default function App() {
