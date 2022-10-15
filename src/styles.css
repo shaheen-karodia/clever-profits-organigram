@@ -28,6 +28,7 @@ body {
   width: 0px;
   height: 0px;
   background-color: black;
+  border: none;
 }
 
 .simple-floatingedges .react-flow__handle-top {

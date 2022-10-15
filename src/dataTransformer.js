@@ -1,5 +1,5 @@
 import { MarkerType } from "react-flow-renderer";
-import mapKeys from "lodash.mapkeys";
+
 const position = { x: 0, y: 0 };
 
 export const getNodes = (entities) => {
@@ -22,10 +22,15 @@ export const getEdges = (holdings) => {
       source: sourceId,
       target: targetId,
       animated: false,
-      label: h.percentageHoldings,
+      label: `${h.percentageHoldings} %`,
       labelStyle: { fill: "black", fontWeight: 700 },
       type: "floating",
-      markerEnd: { type: MarkerType.ArrowClosed },
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        color: "black",
+        width: 15,
+        height: 15,
+      },
     };
   });
 };

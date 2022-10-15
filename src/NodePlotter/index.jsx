@@ -42,21 +42,24 @@ const NodeAsHandleFlow = ({ initialNodes, initialEdges }) => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const onConnect = useCallback(
-    (params) =>
-      console.log(params) ||
-      setEdges((eds) =>
-        addEdge(
-          {
-            ...params,
-            type: "floating",
-            markerEnd: { type: MarkerType.Arrow },
+  const onConnect = useCallback((params) => {
+    setEdges((eds) =>
+      addEdge(
+        {
+          ...params,
+          type: "floating",
+          markerEnd: {
+            type: MarkerType.ArrowClosed,
+            color: "black",
+            width: 50,
+            height: 50,
           },
-          eds
-        )
-      ),
-    []
-  );
+        },
+        eds
+      )
+    ),
+      [];
+  });
 
   return (
     <div className="simple-floatingedges">

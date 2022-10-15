@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useStore, SmoothStepEdge } from "react-flow-renderer";
+import { useStore, StepEdge } from "react-flow-renderer";
 
 import { getEdgeParams } from "./utils.js";
 
@@ -24,7 +24,7 @@ function SimpleFloatingEdge(props) {
   );
 
   return (
-    <SmoothStepEdge
+    <StepEdge
       {...rest}
       sourceX={sx}
       sourceY={sy}
