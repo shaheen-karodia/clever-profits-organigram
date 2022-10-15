@@ -58,12 +58,13 @@ export const PartnershipNode = memo(({ data }) => {
   );
 });
 
+//RECTANGLE
 export const LLCNode = memo(({ data }) => {
   return (
     <Wrapper label={data.label}>
-      <svg width="130" height="50" style={svgStyleObj}>
+      <svg width="120" height="50" style={svgStyleObj}>
         <path
-          d="M0,0 L120,0  L130,25 L120,50 L0,50 z"
+          d="M0,0 L120,0 L120,50 L0,50 z"
           fill="#784be8"
           strokeWidth="0"
           stroke="#fff"
@@ -93,6 +94,7 @@ export const SCorpNode = memo(({ data }) => {
   );
 });
 
+//CIRCLE
 export const IndividualNode = memo(({ data }) => {
   return (
     <Wrapper label={data.label}>
