@@ -22,10 +22,8 @@ export default function App() {
   const { toggleMenu } = useContext(MenuContext);
   const { entityStore, holdingStore } = useContext(StoreContext);
 
-  const holdings = [];
-  const entities = [];
   const initialNodes = getNodes(entityStore.entities);
-  const initialEdges = getEdges(holdings, entities);
+  const initialEdges = getEdges(holdingStore.holdings);
 
   return (
     <>

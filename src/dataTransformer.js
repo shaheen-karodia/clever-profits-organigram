@@ -13,14 +13,12 @@ export const getNodes = (entities) => {
   });
 };
 
-export const getEdges = (holdings, entities) => {
-  const entityNameMap = mapKeys(entities, "name");
-
+export const getEdges = (holdings) => {
   return holdings.map((h) => {
-    const sourceId = entityNameMap[h["Name"]].id;
-    const targetId = entityNameMap[h["Investment in"]].id;
+    const sourceId = h.fromEntityId;
+    const targetId = h.toEntityId;
     return {
-      id: `e${sourceId}${targetId}`,
+      id: `edge-${sourceId}${targetId}`,
       source: sourceId,
       target: targetId,
       animated: false,

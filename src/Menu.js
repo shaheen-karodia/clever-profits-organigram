@@ -27,7 +27,7 @@ function Menu() {
   };
 
   console.log("entitiesssssss", JSON.stringify(entityStore.entities));
-  console.log("holdings", holdingStore.holdings);
+  console.log("holdings", JSON.stringify(holdingStore.holdings));
 
   return (
     <div className="Menu">
