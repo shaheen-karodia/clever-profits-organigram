@@ -105,4 +105,20 @@ function useEntityStore() {
   };
 }
 
-export default useEntityStore;
+const EntityContext = React.createContext({});
+
+const EntityProvider = (props) => {
+  const { entityStore, children } = props;
+
+  return (
+    <EntityContext.Provider
+      value={{
+        entityStore,
+      }}
+    >
+      {children}
+    </EntityContext.Provider>
+  );
+};
+
+export { EntityProvider, useEntityStore, EntityContext };

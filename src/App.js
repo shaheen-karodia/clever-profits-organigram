@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { StoreContext } from "./StoreProvider";
 import DownloadButton from "./DownloadButton";
 import { nodeTypes } from "./NodePlotter/Nodes";
 import SimpleFloatingEdge from "./NodePlotter/SimpleFloatingEdge";
@@ -15,13 +14,7 @@ import ReactFlow, {
   Controls,
 } from "react-flow-renderer";
 import { PlotterContext } from "./PlotterContext";
-import {
-  ENTITY_PARTNERSHIP_VALUE,
-  ENTITY_INDIVIDUAL_VALUE,
-  ENTITY_LLC_VALUE,
-  ENTITY_TRUST_VALUE,
-  ENTITY_SCORP_VALUE,
-} from "./entityType";
+import { TitleContext } from "./TitleContext";
 
 const ContainerDiv = styled(Container)`
   font-family: sans-serif;
@@ -41,7 +34,7 @@ const fitViewOptions = { padding: 4 };
 
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
-  const { titleStore } = useContext(StoreContext);
+  const { titleStore } = useContext(TitleContext);
   const { nodes, edges, onNodesChange, onEdgesChange } =
     useContext(PlotterContext);
 

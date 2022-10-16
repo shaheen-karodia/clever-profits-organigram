@@ -1,15 +1,15 @@
 import React, { useState, StrictMode } from "react";
 import ReactDOM from "react-dom";
 
-import useEntityStore from "./useEntityStore";
 import MenuProvider from "react-flexible-sliding-menu";
 import "./styles.css";
 import App from "./App";
 import Menu from "./Menu";
-import { StoreProvider } from "./StoreProvider";
 import { PlotterProvider, usePlotterStore } from "./PlotterContext";
 import { HoldingsProvider, useHoldingsStore } from "./HoldingsContext";
+import { EntityProvider, useEntityStore } from "./EntityContext";
 import { getNodes, getEdges } from "./dataTransformer";
+import { TitleProvider } from "./TitleContext";
 
 const rootElement = document.getElementById("root");
 
@@ -26,20 +26,26 @@ const IndexComp = () => {
   return (
     <StrictMode>
       <HoldingsProvider holdingStore={holdingStore}>
-        <StoreProvider entityStore={entityStore} titleStore={titleStore}>
-          <PlotterProvider
-            nodes={nodes}
-            setNodes={setNodes}
-            onNodesChange={onNodesChange}
-            edges={edges}
-            setEdges={setEdges}
-            onEdgesChange={onEdgesChange}
-          >
-            <MenuProvider MenuComponent={Menu} animation="push" width={"900px"}>
-              <App />
-            </MenuProvider>
-          </PlotterProvider>
-        </StoreProvider>
+        <TitleProvider titleStore={titleStore}>
+          <EntityProvider entityStore={entityStore}>
+            <PlotterProvider
+              nodes={nodes}
+              setNodes={setNodes}
+              onNodesChange={onNodesChange}
+              edges={edges}
+              setEdges={setEdges}
+              onEdgesChange={onEdgesChange}
+            >
+              <MenuProvider
+                MenuComponent={Menu}
+                animation="push"
+                width={"900px"}
+              >
+                <App />
+              </MenuProvider>
+            </PlotterProvider>
+          </EntityProvider>
+        </TitleProvider>
       </HoldingsProvider>
     </StrictMode>
   );

@@ -1,14 +1,17 @@
 import React, { useContext } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { SkarTable } from "./GeneralTableUtils";
-import { StoreContext } from "./StoreProvider";
+
 import CloseMenuButton from "./CloseMenuButton";
 import { HoldingsContext } from "./HoldingsContext";
+import { EntityContext } from "./EntityContext";
+import { TitleContext } from "./TitleContext";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
   const { holdingStore } = useContext(HoldingsContext);
-  const { entityStore, titleStore } = useContext(StoreContext);
+  const { titleStore } = useContext(TitleContext);
+  const { entityStore } = useContext(EntityContext);
   const [title, setTitle] = titleStore;
 
   /***
@@ -39,7 +42,7 @@ function Menu() {
       />
       <br />
       <br />
-      <h2>Entities Table</h2>
+      <h2>Entity Table</h2>
       <SkarTable
         headers={entityStore.HEADERS}
         rowSchema={entityStore.ROW_SCHEMA}
