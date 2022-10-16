@@ -4,7 +4,7 @@ import "./styles.css";
 import styled from "styled-components";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { Container, Row, Col } from "react-bootstrap";
-import { getNodes, getEdges } from "./dataTransformer";
+
 import { StoreContext } from "./StoreProvider";
 import DownloadButton from "./DownloadButton";
 import { nodeTypes } from "./NodePlotter/Nodes";
@@ -13,9 +13,8 @@ import ReactFlow, {
   Background,
   ConnectionMode,
   Controls,
-  MiniMap,
 } from "react-flow-renderer";
-
+import { PlotterContext } from "./PlotterContext";
 import {
   ENTITY_PARTNERSHIP_VALUE,
   ENTITY_INDIVIDUAL_VALUE,
@@ -23,7 +22,6 @@ import {
   ENTITY_TRUST_VALUE,
   ENTITY_SCORP_VALUE,
 } from "./entityType";
-import usePlotterStore from "./usePlotterStore";
 
 const ContainerDiv = styled(Container)`
   font-family: sans-serif;
@@ -41,42 +39,18 @@ const edgeTypes = {
 
 const fitViewOptions = { padding: 4 };
 
-const nodeColor = (node) => {
-  switch (node.type) {
-    case ENTITY_PARTNERSHIP_VALUE:
-      return "#ff6700";
-
-    case ENTITY_INDIVIDUAL_VALUE:
-      return "#ff0072";
-    case ENTITY_LLC_VALUE:
-      return "#784be8";
-    case ENTITY_TRUST_VALUE:
-      return "#6ede87";
-    case ENTITY_SCORP_VALUE:
-      return "#668de3";
-    default:
-      return "#eee";
-  }
-};
-
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
-  const { entityStore, holdingStore, titleStore } = useContext(StoreContext);
-
-  const initialNodes = getNodes(entityStore.entities);
-  const initialEdges = getEdges(holdingStore.holdings);
-
-  const { nodes, onNodesChange, edges, onEdgesChange } = usePlotterStore({
-    initialNodes,
-    initialEdges,
-  });
+  const { titleStore } = useContext(StoreContext);
+  const { nodes, edges, onNodesChange, onEdgesChange } =
+    useContext(PlotterContext);
 
   const [title] = titleStore;
   return (
     <div className="screenshot-area">
       <div className="action-button-wrapper">
         <button onClick={toggleMenu} className="primary-btn menu-button">
-          Show Input Table
+          Show Menu
         </button>
         <DownloadButton />
       </div>
@@ -99,7 +73,6 @@ export default function App() {
               >
                 <Background style={{ backgroundColor: "white" }} />
                 <Controls />
-                <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} />
               </ReactFlow>
             </div>
           </DemoArea>
