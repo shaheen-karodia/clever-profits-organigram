@@ -11,8 +11,6 @@ import { nodeTypes } from "./NodePlotter/Nodes";
 import SimpleFloatingEdge from "./NodePlotter/SimpleFloatingEdge";
 import ReactFlow, {
   Background,
-  useNodesState,
-  useEdgesState,
   ConnectionMode,
   Controls,
   MiniMap,
@@ -25,6 +23,7 @@ import {
   ENTITY_TRUST_VALUE,
   ENTITY_SCORP_VALUE,
 } from "./entityType";
+import usePlotterStore from "./usePlotterStore";
 
 const ContainerDiv = styled(Container)`
   font-family: sans-serif;
@@ -66,15 +65,18 @@ export default function App() {
 
   const initialNodes = getNodes(entityStore.entities);
   const initialEdges = getEdges(holdingStore.holdings);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const { nodes, onNodesChange, edges, onEdgesChange } = usePlotterStore({
+    initialNodes,
+    initialEdges,
+  });
 
   const [title] = titleStore;
   return (
     <div className="screenshot-area">
       <div className="action-button-wrapper">
         <button onClick={toggleMenu} className="primary-btn menu-button">
-          Toggle Menu
+          Show Input Table
         </button>
         <DownloadButton />
       </div>
