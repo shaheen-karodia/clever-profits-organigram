@@ -15,7 +15,16 @@ import ReactFlow, {
   useEdgesState,
   ConnectionMode,
   Controls,
+  MiniMap,
 } from "react-flow-renderer";
+
+import {
+  ENTITY_PARTNERSHIP_VALUE,
+  ENTITY_INDIVIDUAL_VALUE,
+  ENTITY_LLC_VALUE,
+  ENTITY_TRUST_VALUE,
+  ENTITY_SCORP_VALUE,
+} from "./entityType";
 
 const ContainerDiv = styled(Container)`
   font-family: sans-serif;
@@ -32,6 +41,24 @@ const edgeTypes = {
 };
 
 const fitViewOptions = { padding: 4 };
+
+const nodeColor = (node) => {
+  switch (node.type) {
+    case ENTITY_PARTNERSHIP_VALUE:
+      return "#ff6700";
+
+    case ENTITY_INDIVIDUAL_VALUE:
+      return "#ff0072";
+    case ENTITY_LLC_VALUE:
+      return "#784be8";
+    case ENTITY_TRUST_VALUE:
+      return "#6ede87";
+    case ENTITY_SCORP_VALUE:
+      return "#668de3";
+    default:
+      return "#eee";
+  }
+};
 
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
@@ -70,6 +97,7 @@ export default function App() {
               >
                 <Background style={{ backgroundColor: "white" }} />
                 <Controls />
+                <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} />
               </ReactFlow>
             </div>
           </DemoArea>
