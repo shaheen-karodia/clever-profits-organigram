@@ -3,10 +3,12 @@ import { MenuContext } from "react-flexible-sliding-menu";
 import { SkarTable } from "./GeneralTableUtils";
 import { StoreContext } from "./StoreProvider";
 import CloseMenuButton from "./CloseMenuButton";
+import { HoldingsContext } from "./HoldingsContext";
 
 function Menu() {
   const { closeMenu } = useContext(MenuContext);
-  const { entityStore, holdingStore, titleStore } = useContext(StoreContext);
+  const { holdingStore } = useContext(HoldingsContext);
+  const { entityStore, titleStore } = useContext(StoreContext);
   const [title, setTitle] = titleStore;
 
   /***
@@ -26,9 +28,6 @@ function Menu() {
       entityStore.onRowDelete(id);
     }
   };
-
-  console.log("entitiesssssss", JSON.stringify(entityStore.entities));
-  console.log("holdings", JSON.stringify(holdingStore.holdings));
 
   return (
     <div className="Menu">

@@ -50,7 +50,7 @@ export default function App() {
     <div className="screenshot-area">
       <div className="action-button-wrapper">
         <button onClick={toggleMenu} className="primary-btn menu-button">
-          Show Menu
+          Show Table
         </button>
         <DownloadButton />
       </div>
