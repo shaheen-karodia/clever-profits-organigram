@@ -1,12 +1,21 @@
 import React, { useContext } from "react";
 import "./styles.css";
-import NodePlotter from "./NodePlotter";
+
 import styled from "styled-components";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { Container, Row, Col } from "react-bootstrap";
 import { getNodes, getEdges } from "./dataTransformer";
 import { StoreContext } from "./StoreProvider";
 import DownloadButton from "./DownloadButton";
+import { nodeTypes } from "./NodePlotter/Nodes";
+import SimpleFloatingEdge from "./NodePlotter/SimpleFloatingEdge";
+import ReactFlow, {
+  Background,
+  useNodesState,
+  useEdgesState,
+  ConnectionMode,
+  Controls,
+} from "react-flow-renderer";
 
 const ContainerDiv = styled(Container)`
   font-family: sans-serif;
@@ -18,12 +27,20 @@ const DemoArea = styled(Col)`
   height: calc(100vh - 16px);
 `;
 
+const edgeTypes = {
+  floating: SimpleFloatingEdge,
+};
+
+const fitViewOptions = { padding: 4 };
+
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);
   const { entityStore, holdingStore, titleStore } = useContext(StoreContext);
 
   const initialNodes = getNodes(entityStore.entities);
   const initialEdges = getEdges(holdingStore.holdings);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const [title] = titleStore;
   return (
@@ -36,14 +53,25 @@ export default function App() {
       </div>
       <h2 className="project-title">{title}</h2>
 
-      {/* <h3>{titleStore.title}</h3> */}
       <ContainerDiv fluid>
         <Row>
           <DemoArea>
-            <NodePlotter
-              initialNodes={initialNodes}
-              initialEdges={initialEdges}
-            />
+            <div className="simple-floatingedges">
+              <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                edgeTypes={edgeTypes}
+                nodeTypes={nodeTypes}
+                fitView
+                fitViewOptions={fitViewOptions}
+                connectionMode={ConnectionMode.Loose}
+              >
+                <Background style={{ backgroundColor: "white" }} />
+                <Controls />
+              </ReactFlow>
+            </div>
           </DemoArea>
         </Row>
       </ContainerDiv>

@@ -1,6 +1,9 @@
 import { Position } from "react-flow-renderer";
 import { internalsSymbol } from "react-flow-renderer";
 
+/***
+ * BASED ON THE EXAMPLE TO MAKE A SIMPLE FLOATING EDGE
+ */
 // returns the position (top,right,bottom or right) passed node compared to
 function getParams(nodeA, nodeB) {
   const centerA = getNodeCenter(nodeA);
@@ -59,7 +62,7 @@ function getHandleCoordsByPosition(node, handlePosition) {
 function getNodeCenter(node) {
   return {
     x: node.positionAbsolute.x + node.width / 2,
-    y: node.positionAbsolute.y + node.height / 2
+    y: node.positionAbsolute.y + node.height / 2,
   };
 }
 
@@ -74,6 +77,6 @@ export function getEdgeParams(source, target) {
     tx,
     ty,
     sourcePos,
-    targetPos
+    targetPos,
   };
 }

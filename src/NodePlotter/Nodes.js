@@ -1,6 +1,13 @@
 import React, { memo } from "react";
 import { Handle } from "react-flow-renderer";
 
+import {
+  ENTITY_PARTNERSHIP_VALUE,
+  ENTITY_INDIVIDUAL_VALUE,
+  ENTITY_LLC_VALUE,
+  ENTITY_TRUST_VALUE,
+  ENTITY_SCORP_VALUE,
+} from "../entityType";
 // ********* Helpers ******** //
 
 const svgStyleObj = { display: "block", overflow: "visible" };
@@ -166,3 +173,11 @@ export const IndividualNode = memo(({ data }) => {
     </Wrapper>
   );
 });
+
+export const nodeTypes = {
+  [ENTITY_PARTNERSHIP_VALUE]: PartnershipNode,
+  [ENTITY_INDIVIDUAL_VALUE]: IndividualNode,
+  [ENTITY_LLC_VALUE]: LLCNode,
+  [ENTITY_TRUST_VALUE]: TrustNode,
+  [ENTITY_SCORP_VALUE]: SCorpNode,
+};
