@@ -1,9 +1,8 @@
 import React, { useState, StrictMode } from "react";
 import ReactDOM from "react-dom";
-import useHoldingsState from "./useHoldingsState";
-import useEntitiesState from "./useEntitiesState";
+import useHoldingsStore from "./useHoldingsStore";
+import useEntityStore from "./useEntityStore";
 import MenuProvider from "react-flexible-sliding-menu";
-import "@glideapps/glide-data-grid/dist/index.css";
 import "./styles.css";
 import App from "./App";
 import Menu from "./Menu";
@@ -12,9 +11,9 @@ import { StoreProvider } from "./StoreProvider";
 const rootElement = document.getElementById("root");
 
 const IndexComp = () => {
-  const entityStore = useEntitiesState();
+  const entityStore = useEntityStore();
   const entitiesOptions = entityStore.getEntityOptions();
-  const holdingStore = useHoldingsState(entitiesOptions);
+  const holdingStore = useHoldingsStore(entitiesOptions);
   const titleStore = useState("");
 
   return (

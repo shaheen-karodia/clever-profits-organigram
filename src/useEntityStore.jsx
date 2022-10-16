@@ -58,7 +58,7 @@ const initialData = [
   },
 ];
 
-function useEntitiesState() {
+function useEntityStore() {
   const [entities, setEntities] = useState(initialData);
 
   const onCellChange = ({ rowId, property, value }) => {
@@ -105,4 +105,4 @@ function useEntitiesState() {
   };
 }
 
-export default useEntitiesState;
+export default useEntityStore;

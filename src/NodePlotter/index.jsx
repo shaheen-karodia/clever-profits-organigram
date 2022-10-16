@@ -68,7 +68,8 @@ const NodeAsHandleFlow = ({ initialNodes, initialEdges }) => {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
+        // onConnect={onConnect}
+        // snapToGrid
         edgeTypes={edgeTypes}
         nodeTypes={nodeTypes}
         fitView

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { cellTypes, getAdditionalRow } from "./GeneralTableUtils";
 
-function useHoldingsState(entitiesOptions) {
+function useHoldingsStore(entitiesOptions) {
   const HEADERS = ["Name", "Investment in", "Holdings %"];
 
   const ROW_SCHEMA = [
@@ -74,6 +74,7 @@ function useHoldingsState(entitiesOptions) {
   };
 
   const onRowDelete = (id) => {
+    console.log("in delete", id);
     const updatedHoldings = holdings.filter((h) => h.id !== id);
     setHoldings(updatedHoldings);
   };
@@ -98,4 +99,4 @@ function useHoldingsState(entitiesOptions) {
   };
 }
 
-export default useHoldingsState;
+export default useHoldingsStore;
