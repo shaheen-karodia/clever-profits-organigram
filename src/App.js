@@ -30,7 +30,7 @@ const edgeTypes = {
   floating: SimpleFloatingEdge,
 };
 
-const fitViewOptions = { padding: 4 };
+const fitViewOptions = { padding: 0 };
 
 export default function App() {
   const { toggleMenu } = useContext(MenuContext);

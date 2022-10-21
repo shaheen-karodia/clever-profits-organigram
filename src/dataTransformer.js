@@ -9,11 +9,19 @@ const position = { x: 0, y: 0 };
 const getNextPositionGenerator = () => {
   let x = 0;
   let y = 0;
+  const INCREMENT_X = 200;
+  const INCREMENT_Y = 100;
 
   return () => {
-    x = x + 200;
-    y = y + 200;
-    return { x, y };
+    const position = { x, y };
+    x = x + INCREMENT_X;
+
+    if (x > INCREMENT_X * 3) {
+      x = 0;
+      y += INCREMENT_Y;
+    }
+
+    return position;
   };
 };
 
