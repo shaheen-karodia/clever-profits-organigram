@@ -22,23 +22,27 @@ export const entityDataToNodeDataMapper = (entity) => {
 };
 
 export const getEdges = (holdings) => {
-  return holdings.map((h) => {
-    const sourceId = h.fromEntityId;
-    const targetId = h.toEntityId;
-    return {
-      id: `edge-${sourceId}${targetId}`,
-      source: sourceId,
-      target: targetId,
-      animated: false,
-      label: `${h.percentageHoldings} %`,
-      labelStyle: { fill: "black", fontWeight: 700 },
-      type: "floating",
-      markerEnd: {
-        type: MarkerType.ArrowClosed,
-        color: "black",
-        width: 15,
-        height: 15,
-      },
-    };
-  });
+  return holdings.map((h) => holidingToEdgeMapper(h));
+};
+
+export const holidingToEdgeMapper = (holding) => {
+  const sourceId = holding.fromEntityId;
+  const targetId = holding.toEntityId;
+
+  const edge = {
+    id: `edge-${sourceId}${targetId}`,
+    source: sourceId,
+    target: targetId,
+    animated: false,
+    label: `${holding.percentageHoldings} %`,
+    labelStyle: { fill: "black", fontWeight: 700 },
+    type: "floating",
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+      color: "black",
+      width: 15,
+      height: 15,
+    },
+  };
+  return edge;
 };
