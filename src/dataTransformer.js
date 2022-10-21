@@ -10,11 +10,15 @@ export const getNodes = (entities) => {
 export const entityToNodeMapper = (entity) => {
   const node = {
     id: entity.id,
-    data: { label: entity.entityName, passthrough: entity.passthrough },
+    data: entityDataToNodeDataMapper(entity),
     position,
     type: entity.entityTypeId,
   };
   return node;
+};
+
+export const entityDataToNodeDataMapper = (entity) => {
+  return { label: entity.entityName, passthrough: entity.passthrough };
 };
 
 export const getEdges = (holdings) => {

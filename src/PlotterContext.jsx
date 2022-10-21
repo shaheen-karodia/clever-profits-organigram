@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import ReactFlow, { useNodesState, useEdgesState } from "react-flow-renderer";
 import _ from "lodash";
-import { entityToNodeMapper } from "./dataTransformer";
+import {
+  entityDataToNodeDataMapper,
+  entityToNodeMapper,
+} from "./dataTransformer";
 /***
  * Hook for managaing the state of the the plotter
  */
@@ -11,7 +14,10 @@ function usePlotterStore({ initialNodes, initialEdges, entities }) {
 
   useEffect(() => {
     setNodes((nds) => {
-      const entityIds = _.map(entities, _.property("id"));
+      const normalizedEntities = _.mapKeys(entities, "id");
+
+      console.log("normalized", normalizedEntities);
+      const entityIds = Object.keys(normalizedEntities);
       const nodeIds = _.map(nds, _.property("id"));
       const addedNodes = entities
         .filter((e) => !nodeIds.includes(e.id))
@@ -19,21 +25,20 @@ function usePlotterStore({ initialNodes, initialEdges, entities }) {
 
       return (
         nds
-          //deal with any entity deletes
+          //entity deletes
           .filter((node) => entityIds.includes(node.id))
+          //updated entities
           .map((node) => {
-            // if (node.id === ) {
-            //   // it's important that you create a new object here
-            //   // in order to notify react flow about the change
-            //   node.data = {
-            //     ...node.data,
-            //     label: nodeName,
-            //   };
-            // }
+            console.log("node", node);
+            // it's important that you create a new object here
+            // in order to notify react flow about the change
+            node.data = {
+              ...entityDataToNodeDataMapper(normalizedEntities[node.id]),
+            };
 
             return node;
           })
-          //deal with new entities
+          //new entities
           .concat(addedNodes)
       );
     });
