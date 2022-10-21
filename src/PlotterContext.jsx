@@ -8,15 +8,16 @@ import {
 /***
  * Hook for managaing the state of the the plotter
  */
-function usePlotterStore({ initialNodes, initialEdges, entities }) {
+function usePlotterStore({ initialNodes, initialEdges, entities, holdings }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
+  /***
+   * Dynamically update the plotter based on the entities table
+   */
   useEffect(() => {
     setNodes((nds) => {
       const normalizedEntities = _.mapKeys(entities, "id");
-
-      console.log("normalized", normalizedEntities);
       const entityIds = Object.keys(normalizedEntities);
       const nodeIds = _.map(nds, _.property("id"));
       const addedNodes = entities
@@ -29,7 +30,8 @@ function usePlotterStore({ initialNodes, initialEdges, entities }) {
           .filter((node) => entityIds.includes(node.id))
           //updated entities
           .map((node) => {
-            console.log("node", node);
+            const updatedEntity = normalizedEntities[node.id];
+            node.type = updatedEntity.entityTypeId;
             // it's important that you create a new object here
             // in order to notify react flow about the change
             node.data = {
@@ -43,6 +45,17 @@ function usePlotterStore({ initialNodes, initialEdges, entities }) {
       );
     });
   }, [entities, setNodes]);
+
+  /***
+   * Dynamically update the plotter based on the edges table
+   */
+  useEffect(() => {
+    setNodes((edges) => {
+      return edges.map((edge) => {
+        return edge;
+      });
+    });
+  }, [holdings, setNodes]);
 
   return {
     nodes,

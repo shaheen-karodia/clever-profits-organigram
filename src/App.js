@@ -40,7 +40,6 @@ export default function App() {
 
   const [title] = titleStore;
 
-  console.log("nodes", nodes);
   return (
     <div className="screenshot-area">
       <div className="action-button-wrapper">
@@ -57,7 +56,7 @@ export default function App() {
             <div className="simple-floatingedges">
               <ReactFlow
                 nodes={nodes}
-                edges={[]}
+                edges={edges}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 edgeTypes={edgeTypes}

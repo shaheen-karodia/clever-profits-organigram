@@ -25,6 +25,7 @@ const IndexComp = () => {
       initialNodes,
       initialEdges,
       entities: entityStore.entities,
+      holdings: holdingStore.holdings,
     });
 
   return (
@@ -34,17 +35,13 @@ const IndexComp = () => {
           <EntityProvider entityStore={entityStore}>
             <PlotterProvider
               nodes={nodes}
-              setNodes={setNodes}
-              onNodesChange={onNodesChange}
               edges={edges}
+              setNodes={setNodes}
               setEdges={setEdges}
               onEdgesChange={onEdgesChange}
+              onNodesChange={onNodesChange}
             >
-              <MenuProvider
-                MenuComponent={Menu}
-                animation="push"
-                width={"900px"}
-              >
+              <MenuProvider MenuComponent={Menu} width={"900px"}>
                 <App />
               </MenuProvider>
             </PlotterProvider>
