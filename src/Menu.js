@@ -31,7 +31,6 @@ function Menu() {
       entityStore.onRowDelete(id);
     }
   };
-  console.log("entities", entityStore.entities);
 
   return (
     <div className="Menu">

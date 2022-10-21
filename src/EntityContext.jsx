@@ -25,41 +25,8 @@ const ROW_SCHEMA = [
 
 const getAdditionalEntityRow = getAdditionalRow(ROW_SCHEMA);
 
-const initialData = [
-  {
-    id: "84c56940-f17b-45dd-ad8b-572ba04e681a",
-    entityName: "tasneem",
-    entityTypeId: "individual",
-    passthrough: true,
-  },
-  {
-    id: "57870f8f-756a-4a62-8d12-d2254562bb56",
-    entityName: "Shaheen a reasonably long name",
-    entityTypeId: "partnership",
-    passthrough: false,
-  },
-  {
-    id: "49bf9fed-90b8-4328-912a-25b407efc159",
-    entityName: "JL",
-    entityTypeId: "llc",
-    passthrough: true,
-  },
-  {
-    id: "be8c5cb6-ddd8-4103-b54b-60ae99712375",
-    entityName: "Onyx",
-    entityTypeId: "trust",
-    passthrough: false,
-  },
-  {
-    id: "357ac6fe-2430-43d9-abf2-16bbe0d6396d",
-    entityName: "Romelon",
-    entityTypeId: "s-corp",
-    passthrough: true,
-  },
-];
-
 function useEntityStore() {
-  const [entities, setEntities] = useState(initialData);
+  const [entities, setEntities] = useState([]);
 
   const onCellChange = ({ rowId, property, value }) => {
     const newEntities = entities.map((e) => {
