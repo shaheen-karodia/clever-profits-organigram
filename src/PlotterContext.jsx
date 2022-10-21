@@ -50,10 +50,19 @@ function usePlotterStore({ initialNodes, initialEdges, entities, holdings }) {
    * Dynamically update the plotter based on the edges table
    */
   useEffect(() => {
-    setNodes((edges) => {
-      return edges.map((edge) => {
-        return edge;
-      });
+    setEdges((edges) => {
+      const normalizedHoldings = _.mapKeys(holdings, "id");
+      const holdingsIds = Object.keys(normalizedHoldings);
+
+      return (
+        edges
+          //entity deletes
+          .filter((edge) => holdingsIds.includes(edge.id))
+
+          .map((edge) => {
+            return edge;
+          })
+      );
     });
   }, [holdings, setNodes]);
 

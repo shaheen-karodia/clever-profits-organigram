@@ -30,7 +30,7 @@ export const holidingToEdgeMapper = (holding) => {
   const targetId = holding.toEntityId;
 
   const edge = {
-    id: `edge-${sourceId}${targetId}`,
+    id: holding.id,
     source: sourceId,
     target: targetId,
     animated: false,
