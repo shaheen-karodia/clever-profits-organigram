@@ -18,7 +18,7 @@ const ROW_SCHEMA = [
   },
   {
     name: "passthrough",
-    initialValue: true,
+    initialValue: false,
     type: cellTypes.CHECK_BOX,
   },
 ];
