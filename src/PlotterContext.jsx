@@ -4,6 +4,7 @@ import _ from "lodash";
 import {
   entityDataToNodeDataMapper,
   entityToNodeMapper,
+  holidingToEdgeMapper,
 } from "./dataTransformer";
 /***
  * Hook for managaing the state of the the plotter
@@ -53,15 +54,22 @@ function usePlotterStore({ initialNodes, initialEdges, entities, holdings }) {
     setEdges((edges) => {
       const normalizedHoldings = _.mapKeys(holdings, "id");
       const holdingsIds = Object.keys(normalizedHoldings);
+      const edgeIds = _.map(edges, _.property("id"));
+      const addedEdges = holdings
+        .filter((e) => !edgeIds.includes(e.id))
+        .map((e) => holidingToEdgeMapper(e));
 
       return (
         edges
-          //entity deletes
+          //holdings deletes
           .filter((edge) => holdingsIds.includes(edge.id))
-
+          //holdings edit
           .map((edge) => {
-            return edge;
+            const updatedHolding = normalizedHoldings[edge.id];
+            return holidingToEdgeMapper(updatedHolding);
           })
+          //new holdings
+          .concat(addedEdges)
       );
     });
   }, [holdings, setNodes]);
