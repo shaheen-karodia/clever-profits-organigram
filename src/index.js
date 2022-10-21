@@ -8,7 +8,7 @@ import Menu from "./Menu";
 import { PlotterProvider, usePlotterStore } from "./PlotterContext";
 import { HoldingsProvider, useHoldingsStore } from "./HoldingsContext";
 import { EntityProvider, useEntityStore } from "./EntityContext";
-import { getNodes, getEdges } from "./dataTransformer";
+
 import { TitleProvider } from "./TitleContext";
 
 const rootElement = document.getElementById("root");
@@ -18,12 +18,8 @@ const IndexComp = () => {
   const entitiesOptions = entityStore.getEntityOptions();
   const holdingStore = useHoldingsStore(entitiesOptions);
   const titleStore = useState("");
-  const initialNodes = getNodes(entityStore.entities);
-  const initialEdges = getEdges(holdingStore.holdings);
   const { nodes, setNodes, onNodesChange, edges, setEdges, onEdgesChange } =
     usePlotterStore({
-      initialNodes,
-      initialEdges,
       entities: entityStore.entities,
       holdings: holdingStore.holdings,
     });

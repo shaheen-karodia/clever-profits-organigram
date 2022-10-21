@@ -9,9 +9,9 @@ import {
 /***
  * Hook for managaing the state of the the plotter
  */
-function usePlotterStore({ initialNodes, initialEdges, entities, holdings }) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+function usePlotterStore({ entities, holdings }) {
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   /***
    * Dynamically update the plotter based on the entities table

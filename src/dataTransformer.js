@@ -3,10 +3,6 @@ import _ from "lodash";
 
 const position = { x: 0, y: 0 };
 
-export const getNodes = (entities) => {
-  return entities.map((e) => entityToNodeMapper(e));
-};
-
 export const entityToNodeMapper = (entity) => {
   const node = {
     id: entity.id,
@@ -19,10 +15,6 @@ export const entityToNodeMapper = (entity) => {
 
 export const entityDataToNodeDataMapper = (entity) => {
   return { label: entity.entityName, passthrough: entity.passthrough };
-};
-
-export const getEdges = (holdings) => {
-  return holdings.map((h) => holidingToEdgeMapper(h));
 };
 
 export const holidingToEdgeMapper = (holding) => {
