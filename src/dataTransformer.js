@@ -3,11 +3,27 @@ import _ from "lodash";
 
 const position = { x: 0, y: 0 };
 
-export const entityToNodeMapper = (entity) => {
+/**
+ * Method used for autoplotting points on the graph
+ */
+const getNextPositionGenerator = () => {
+  let x = 0;
+  let y = 0;
+
+  return () => {
+    x = x + 200;
+    y = y + 200;
+    return { x, y };
+  };
+};
+
+export const getNextPosition = getNextPositionGenerator();
+
+export const createNewNodeFromEntity = (entity) => {
   const node = {
     id: entity.id,
     data: entityDataToNodeDataMapper(entity),
-    position,
+    position: getNextPosition(),
     type: entity.entityTypeId,
   };
   return node;

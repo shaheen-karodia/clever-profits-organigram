@@ -3,7 +3,7 @@ import ReactFlow, { useNodesState, useEdgesState } from "react-flow-renderer";
 import _ from "lodash";
 import {
   entityDataToNodeDataMapper,
-  entityToNodeMapper,
+  createNewNodeFromEntity,
   holidingToEdgeMapper,
 } from "./dataTransformer";
 /***
@@ -23,7 +23,7 @@ function usePlotterStore({ entities, holdings }) {
       const nodeIds = _.map(nds, _.property("id"));
       const addedNodes = entities
         .filter((e) => !nodeIds.includes(e.id))
-        .map((e) => entityToNodeMapper(e));
+        .map((e) => createNewNodeFromEntity(e));
 
       return (
         nds
