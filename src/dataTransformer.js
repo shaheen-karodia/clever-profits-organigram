@@ -1,16 +1,20 @@
 import { MarkerType } from "react-flow-renderer";
+import _ from "lodash";
 
 const position = { x: 0, y: 0 };
 
 export const getNodes = (entities) => {
-  return entities.map((e) => {
-    return {
-      id: e.id,
-      data: { label: e.entityName, passthrough: e.passthrough },
-      position,
-      type: e.entityTypeId,
-    };
-  });
+  return entities.map((e) => entityToNodeMapper(e));
+};
+
+export const entityToNodeMapper = (entity) => {
+  const node = {
+    id: entity.id,
+    data: { label: entity.entityName, passthrough: entity.passthrough },
+    position,
+    type: entity.entityTypeId,
+  };
+  return node;
 };
 
 export const getEdges = (holdings) => {

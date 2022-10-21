@@ -21,7 +21,11 @@ const IndexComp = () => {
   const initialNodes = getNodes(entityStore.entities);
   const initialEdges = getEdges(holdingStore.holdings);
   const { nodes, setNodes, onNodesChange, edges, setEdges, onEdgesChange } =
-    usePlotterStore({ initialNodes, initialEdges });
+    usePlotterStore({
+      initialNodes,
+      initialEdges,
+      entities: entityStore.entities,
+    });
 
   return (
     <StrictMode>
