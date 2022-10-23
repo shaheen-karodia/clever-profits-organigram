@@ -37,7 +37,11 @@ const IndexComp = () => {
               onEdgesChange={onEdgesChange}
               onNodesChange={onNodesChange}
             >
-              <MenuProvider MenuComponent={Menu} width={"900px"}>
+              <MenuProvider
+                MenuComponent={Menu}
+                width={"900px"}
+                animation="push"
+              >
                 <App />
               </MenuProvider>
             </PlotterProvider>
