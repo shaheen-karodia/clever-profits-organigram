@@ -4,9 +4,10 @@ import { Handle } from "react-flow-renderer";
 import {
   ENTITY_PARTNERSHIP_VALUE,
   ENTITY_INDIVIDUAL_VALUE,
-  ENTITY_LLC_VALUE,
+  ENTITY_C_CORP,
   ENTITY_TRUST_VALUE,
   ENTITY_SCORP_VALUE,
+  ENTITY_LLC_SOLE_PROP_VALUE,
 } from "../entityType";
 // ********* Helpers ******** //
 
@@ -80,7 +81,7 @@ export const PartnershipNode = memo(({ data }) => {
 });
 
 //RECTANGLE
-export const LLCNode = memo(({ data }) => {
+export const CCorpNode = memo(({ data }) => {
   const { label, passthrough } = data;
   return (
     <Wrapper label={label}>
@@ -148,7 +149,7 @@ export const SCorpNode = memo(({ data }) => {
   );
 });
 
-//CIRCLE
+//OVAL
 export const IndividualNode = memo(({ data }) => {
   const { label, passthrough } = data;
   return (
@@ -174,10 +175,37 @@ export const IndividualNode = memo(({ data }) => {
   );
 });
 
+//CIRCLE
+export const LLCSolePropNode = memo(({ data }) => {
+  const { label, passthrough } = data;
+  return (
+    <Wrapper label={label}>
+      <svg width="70" height="70" style={svgStyleObj}>
+        <ellipse
+          cx="35"
+          cy="35"
+          rx="35"
+          ry="35"
+          fill="#9ca8b3"
+          strokeWidth="0"
+          stroke="#fff"
+        ></ellipse>
+        {passthrough && (
+          <path
+            d="M 49.053 50.34 C 49.324 49.87 49.595 49.87 49.866 50.34 L 55.828 60.673 C 56.099 61.142 55.963 61.377 55.421 61.377 L 43.497 61.377 C 42.955 61.377 42.82 61.142 43.091 60.673 L 49.053 50.34 Z"
+            {...PassThroughCommonStyles}
+          ></path>
+        )}
+      </svg>
+    </Wrapper>
+  );
+});
+
 export const nodeTypes = {
   [ENTITY_PARTNERSHIP_VALUE]: PartnershipNode,
   [ENTITY_INDIVIDUAL_VALUE]: IndividualNode,
-  [ENTITY_LLC_VALUE]: LLCNode,
+  [ENTITY_C_CORP]: CCorpNode,
   [ENTITY_TRUST_VALUE]: TrustNode,
   [ENTITY_SCORP_VALUE]: SCorpNode,
+  [ENTITY_LLC_SOLE_PROP_VALUE]: LLCSolePropNode,
 };
