@@ -33,36 +33,43 @@ function Menu() {
   };
 
   return (
-    <div className="Menu">
-      <h2>Title</h2>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <br />
-      <br />
-      <h2>Entity Table</h2>
-      <SkarTable
-        headers={entityStore.HEADERS}
-        rowSchema={entityStore.ROW_SCHEMA}
-        rows={entityStore.entities}
-        onCellChange={entityStore.onCellChange}
-        onRowDelete={onEntitiesRowDeleteCordinator}
-        onRowAdd={entityStore.onRowAdd}
-      />
-      <br />
-      <br />
-      <h2>Holding Table</h2>
-      <SkarTable
-        headers={holdingStore.HEADERS}
-        rowSchema={holdingStore.ROW_SCHEMA}
-        rows={holdingStore.holdings}
-        onCellChange={holdingStore.onCellChange}
-        onRowDelete={holdingStore.onRowDelete}
-        onRowAdd={holdingStore.onRowAdd}
-      />
-      <CloseMenuButton onClick={closeMenu} />
+    <div
+      style={{
+        height: "100vh",
+        overflow: "scroll",
+      }}
+    >
+      <div className="Menu">
+        <h2>Title</h2>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <br />
+        <br />
+        <h2>Entity Table</h2>
+        <SkarTable
+          headers={entityStore.HEADERS}
+          rowSchema={entityStore.ROW_SCHEMA}
+          rows={entityStore.entities}
+          onCellChange={entityStore.onCellChange}
+          onRowDelete={onEntitiesRowDeleteCordinator}
+          onRowAdd={entityStore.onRowAdd}
+        />
+        <br />
+        <br />
+        <h2>Holding Table</h2>
+        <SkarTable
+          headers={holdingStore.HEADERS}
+          rowSchema={holdingStore.ROW_SCHEMA}
+          rows={holdingStore.holdings}
+          onCellChange={holdingStore.onCellChange}
+          onRowDelete={holdingStore.onRowDelete}
+          onRowAdd={holdingStore.onRowAdd}
+        />
+        <CloseMenuButton onClick={closeMenu} />
+      </div>
     </div>
   );
 }
